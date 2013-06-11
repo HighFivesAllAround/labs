@@ -1,0 +1,21 @@
+{{#if content}}
+
+  <div class="large-24 columns">
+    <div class='row'>
+      {{#each part in content}}
+
+        {{render "partListItem" part}}
+
+      {{/each}}
+
+      {{view Labs.NewPartView}}
+
+    </div>
+  </div>
+
+{{/if}}
+
+{{#unless controller.addingNewPart}}
+  <button {{action "toggleNewPart"}} class="small">New Part</button>
+{{/unless}}
+

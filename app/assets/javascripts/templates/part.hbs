@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="large-24 columns lil-widget">
+    <a class="stacked">{{model.title}}</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-24 columns lil-widget last">
+    {{outlet}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-24 columns">
+    <div class="row">
+      <div class="large-24 columns lil-widget">
+        <h5>Suggestions</h5>
+      </div>
+    </div>
+
+    {{render "suggestions" model.suggestions}}
+  </div>
+</div>
+
+{{render "comments" model.comments}}
+{{view "Labs.NewCommentView"}}

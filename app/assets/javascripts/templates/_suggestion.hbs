@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="large-24 columns lil-widget">
+    <div class="row">
+      <div class="large-24 columns">
+        <h6 class="left">Name</h6>
+        <ul class="right actions">
+          <li><a href="#" {{action "delete" suggestion}}>X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-24 columns">
+        {{#linkTo "suggestion" suggestion}}Show{{/linkTo}}
+        <p> {{suggestion.content}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
