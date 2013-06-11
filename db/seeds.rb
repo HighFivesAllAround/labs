@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+lorem = "ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit"
+
+# Create a project
+p = Project.create!(:name => "High Fives All Around")
+
+# Give the project some parts
+parts = 3.times.map do |num|
+  p.parts.create!(:title => "Verse #{num + 1}", :content => lorem)
+end
+
+parts.each do |part|
+
+  # Comment on part
+  part.comments.create!(:content => lorem)
+
+  # Give our part a suggestion
+  suggestion = part.suggestions.create!(:content => lorem)
+
+  # Comment on suggestion
+  suggestion.comments.create!(:content => lorem)
+
+end
