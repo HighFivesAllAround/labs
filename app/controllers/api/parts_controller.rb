@@ -11,11 +11,19 @@ class Api::PartsController < ApplicationController
   end
 
   def create
-    respond_with(:api, Part.create(params[:part]))
+    project = Project.find(params[:part].delete(:project_id))
+    respond_with(:api, project.parts.create(part_params))
   end
 
   def destroy
     respond_with(:api, Part.find(params[:id]).destroy)
+  end
+
+
+  private
+
+  def part_params
+    params.require(:part).permit(:title, :content)
   end
 
 end
