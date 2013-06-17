@@ -20,4 +20,4 @@ rerun.txt
 pickle-email-*.html
 .project
 /.vagrant
-/vagrant/assets/**/*.deb
+/vagrant/assets/

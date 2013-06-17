@@ -61,7 +61,6 @@ iptables -A OUTPUT -o eth+ -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -o br+ -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 
-iptables -A OUTPUT -p tcp --dport 21 -j ACCEPT #ftp
 iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT #ssh
 iptables -A OUTPUT -p udp --dport 53 -j ACCEPT #dns
 iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT #dns
@@ -106,5 +105,5 @@ iptables-save > /etc/firewall.conf
 end
 
 cookbook_file "/etc/network/if-up.d/iptables" do
-  mode 00755
+  mode 0755
 end

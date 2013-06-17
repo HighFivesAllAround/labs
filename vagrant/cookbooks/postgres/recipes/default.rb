@@ -12,7 +12,7 @@ package "libpq5"
 package "libpq-dev"
 
 cookbook_file "/etc/postgresql/9.2/main/pg_hba.conf" do
-  mode 00640
+  mode 0640
   owner "postgres"
   group "postgres"
 end
@@ -24,6 +24,7 @@ end
 bash "Add superuser" do
   user "postgres"
   code <<-EOH
+echo "drop role ubuntu" | psql > /dev/null
 createuser --superuser ubuntu
   EOH
 end

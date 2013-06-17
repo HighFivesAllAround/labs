@@ -10,6 +10,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "#{Etc.getlogin}-#{Time.new.strftime("%s")}"
   config.vm.synced_folder ".", "/home/ubuntu/dick_and_jane"
 
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--memory", "1024"]
+    v.customize ["modifyvm", :id, "--cpus", "2"]
+  end
+
   config.ssh.username = "ubuntu"
   config.ssh.private_key_path = "vagrant/assets/keys/id_rsa"
 

@@ -18,6 +18,12 @@
 # limitations under the License.
 #
 
+cookbook_file "/etc/apt/sources.list" do
+  mode 0644
+  owner "root"
+  group "root"
+end
+
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do
   command "apt-get update"
