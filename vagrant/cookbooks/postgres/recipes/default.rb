@@ -24,7 +24,8 @@ end
 bash "Add superuser" do
   user "postgres"
   code <<-EOH
-echo "drop role ubuntu" | psql > /dev/null
 createuser --superuser ubuntu
+touch user_created
   EOH
+  not_if { ::File.exists?("/var/lib/postgresql/user_created") }
 end
