@@ -23,6 +23,7 @@ end
 
 bash "Add superuser" do
   user "postgres"
+  cwd "/var/lib/postgresql"
   code <<-EOH
 createuser --superuser ubuntu
 touch user_created

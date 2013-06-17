@@ -53,10 +53,10 @@ mv src/redis-server /usr/local/bin/
 end
 
 bash "add scripts" do
-  cwd build_path
+  cwd "#{build_path}/utils"
   user "root"
   code <<-EOH
-echo "6379" | ./utils/install_server.sh
+echo "6379" | ./install_server.sh
   EOH
 end
 
