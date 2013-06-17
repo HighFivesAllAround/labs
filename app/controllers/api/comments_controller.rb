@@ -1,6 +1,6 @@
 class Api::CommentsController < ApplicationController
 
-  before_filter :setup_commentable, :only => [:create]
+  before_action :setup_commentable, :only => [:create]
 
   respond_to :json
 
