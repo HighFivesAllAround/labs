@@ -25,5 +25,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apt"
     chef.add_recipe "networking"
     chef.add_recipe "postgres"
+    chef.add_recipe "ruby"
+    chef.add_recipe "node"
   end
 end
