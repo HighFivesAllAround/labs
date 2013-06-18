@@ -19,3 +19,5 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 .project
+/.vagrant
+/vagrant/assets/
