@@ -4,11 +4,14 @@
 require 'etc'
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu_12.04.box"
+  config.vm.box = "ubuntu_12.04"
   config.vm.box_url = "http://provisioning.agrieser.net/vagrant/ubuntu_12.04.box"
   config.vm.network :public_network
+  config.vm.network :private_network, ip: "10.24.48.96"
   config.vm.hostname = "#{Etc.getlogin}-#{Time.new.strftime("%s")}"
-  config.vm.synced_folder ".", "/home/ubuntu/dick_and_jane"
+  config.vm.synced_folder ".", "/home/ubuntu/dick_and_jane", nfs: true
+  # add the following line to /etc/nfs.conf on osx
+  # nfs.server.mount.port = 1022
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", "1024"]
@@ -18,8 +21,7 @@ Vagrant.configure("2") do |config|
   config.ssh.username = "ubuntu"
   config.ssh.private_key_path = "vagrant/assets/keys/id_rsa"
 
-  config.vm.provision :shell, :path => "vagrant/assets/chef_bootstrap.sh"
-
+  config.vm.provision :shell, path: "vagrant/assets/chef_bootstrap.sh"
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "vagrant/cookbooks"
     chef.add_recipe "apt"

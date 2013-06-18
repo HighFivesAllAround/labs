@@ -66,8 +66,14 @@ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT #dns
 iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT #dns
 iptables -A OUTPUT -p udp --dport 67 -j ACCEPT #dhcp
 iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT #http
+iptables -A OUTPUT -p udp --dport 111 -j ACCEPT #portmapper
+iptables -A OUTPUT -p tcp --dport 111 -j ACCEPT #portmapper
 iptables -A OUTPUT -p udp --dport 123 -j ACCEPT #ntp
 iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT #https
+iptables -A OUTPUT -p udp --dport 1022 -j ACCEPT #mountd (nfs)
+iptables -A OUTPUT -p tcp --dport 1022 -j ACCEPT #mountd (nfs)
+iptables -A OUTPUT -p udp --dport 2049 -j ACCEPT #nfs
+iptables -A OUTPUT -p tcp --dport 2049 -j ACCEPT #nfs
 iptables -A OUTPUT -p udp --dport 5353 -j ACCEPT #multicast dns
 iptables -A OUTPUT -p tcp --dport 9418 -j ACCEPT #git
 iptables -A OUTPUT -p tcp --dport 11371 -j ACCEPT #pgp
