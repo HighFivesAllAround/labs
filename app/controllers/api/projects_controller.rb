@@ -11,7 +11,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    respond_with(:api, Project.create(project_params)
+    respond_with(:api, Project.create(project_params))
   end
 
 
