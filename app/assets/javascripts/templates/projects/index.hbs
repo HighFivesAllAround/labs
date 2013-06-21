@@ -1,8 +1,0 @@
-{{#linkTo "projects.new"}}Start a Project{{/linkTo}}
-<div class="projects-list">
-  {{#each project in controller}}
-    {{#linkTo "project" project}}{{project.name}}{{/linkTo}}
-  {{else}}
-    You have no projects
-  {{/each}}
-</div>

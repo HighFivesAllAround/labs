@@ -3,8 +3,6 @@
 
 Labs.Router.map(function() {
 
-  this.resource("projects");
-
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("revise");
