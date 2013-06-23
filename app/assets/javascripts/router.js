@@ -20,7 +20,11 @@ Labs.Router.map(function() {
 
 Labs.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    this.transitionTo('projects');
+    var projects = Labs.Project.find({})
+    var self = this;
+    projects.on("didLoad", function() {
+      self.transitionTo('project', projects.toArray()[0]);
+    });
   }
 });
 
