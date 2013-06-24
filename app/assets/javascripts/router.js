@@ -1,3 +1,5 @@
+Labs.Router.reopen({ location: 'history' });
+
 // Route Definitions
 //
 
