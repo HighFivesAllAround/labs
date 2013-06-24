@@ -1,7 +1,7 @@
 <div class="row">
   {{#if view.editingTitle}}
     <div class="large-2 columns inline-edit">
-      {{view Ember.TextField valueBinding="view.titleCopy"}}
+      {{input valueBinding="view.titleCopy"}}
     </div>
     <div {{action "toggleTitleEdit" target="view"}} class="large-10 columns inline-edit">
       <a {{action "save" target="view"}} class="button small">Save</a>
