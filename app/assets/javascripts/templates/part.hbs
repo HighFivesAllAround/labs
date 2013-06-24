@@ -1,7 +1,15 @@
 <div class="row">
-  <div class="large-12 columns">
-    <a class="stacked">{{model.title}}</a>
-  </div>
+  {{#if view.editingTitle}}
+    <div class="large-2 columns inline-edit">
+      {{input valueBinding="view.titleCopy"}}
+    </div>
+    <div {{action "toggleTitleEdit" target="view"}} class="large-10 columns inline-edit">
+      <a {{action "save" target="view"}} class="button small">Save</a>
+      <a class="button small">Cancel</a>
+    </div>
+  {{else}}
+    <h3 {{action "toggleTitleEdit" target="view"}}>{{model.title}}</h3>
+  {{/if}}
 </div>
 
 <div class="row">
