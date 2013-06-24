@@ -11,7 +11,7 @@
     <div class="row">
       <div class="large-12 columns">
         {{#linkTo "suggestion" suggestion}}Show{{/linkTo}}
-        <p> {{suggestion.content}} </p>
+        {{markdown suggestion.content}}
       </div>
     </div>
   </div>
