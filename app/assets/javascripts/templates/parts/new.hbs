@@ -7,10 +7,10 @@
           <span class="prefix">Title</span>
         </div>
         <div class="large-10 columns">
-          <input type="text" placeholder="title">
+          {{input valueBinding="view.title"}}
         </div>
       </div>
-      <button class="button small">Add</button>
+      <button {{action create target="view"}} class="button small">Add</button>
     </fieldset>
   </form>
 </div>

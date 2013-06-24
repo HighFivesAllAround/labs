@@ -15,6 +15,12 @@ class Api::PartsController < ApplicationController
     respond_with(:api, project.parts.create(part_params))
   end
 
+  def update
+    part = Part.find(params[:id])
+    part.update(params.require(:part).permit(:title))
+    respond_with(:api, part)
+  end
+
   def destroy
     respond_with(:api, Part.find(params[:id]).destroy)
   end
