@@ -137,6 +137,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    zurb-foundation (4.0.9)
+      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -153,3 +155,4 @@ DEPENDENCIES
   sdoc
   uglifier (~> 2.1)
   unicorn
+  zurb-foundation (~> 4.0.0)

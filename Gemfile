@@ -9,6 +9,7 @@ gem 'rails', '4.0.0.rc2'
 gem 'sass-rails', '~> 4.0.0.rc2'
 gem 'uglifier', '~> 2.1'
 gem 'unicorn'
+gem 'zurb-foundation', '~> 4.0.0'
 
 group :development do
   gem 'capistrano'
