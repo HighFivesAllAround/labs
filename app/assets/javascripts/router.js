@@ -8,6 +8,7 @@ Labs.Router.map(function() {
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("revise");
+      this.route("new");
     });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
   });
@@ -28,14 +29,14 @@ Labs.IndexRoute = Ember.Route.extend({
   }
 });
 
-Labs.ProjectsNewRoute = Ember.Route.extend({
-  model: function() {
-    return Labs.Project.create({ parts: [] });
-  }
+Labs.PartIndexRoute = Ember.Route.extend({
+  model: function() { return this.modelFor("part"); },
 });
 
-Labs.PartIndexRoute = Ember.Route.extend({
-  model: function () { return this.modelFor("part"); },
+Labs.PartNewRoute = Ember.Route.extend({
+  model: function() {
+    return Labs.Part.createRecord({});
+  }
 });
 
 Labs.PartReviseRoute = Ember.Route.extend({
@@ -51,4 +52,3 @@ Labs.PartReviseRoute = Ember.Route.extend({
     this.set("controller.model", suggestion);
   }
 });
-

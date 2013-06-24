@@ -24,4 +24,9 @@
   a.button.active {
     @include button-style($bg:$primary-color);
   }
+
+  .button-group {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }

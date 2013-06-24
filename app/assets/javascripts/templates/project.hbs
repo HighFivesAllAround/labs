@@ -1,11 +1,14 @@
 <nav class="sub-top-bar">
   <div class="row">
     <h2 class="left"> {{model.name}} </h2>
-    <ul class="button-group right">
-      {{#each part in model.parts}}
-        <li> {{#linkTo "part" part class="small button"}} {{part.title}} {{/linkTo}} </li>
-      {{/each}}
-    </ul>
+    <div class="right">
+      <ul class="button-group">
+        {{#each part in model.sortedParts}}
+          <li> {{#linkTo "part" part class="small button"}} {{part.title}} {{/linkTo}} </li>
+        {{/each}}
+      </ul>
+      <a class="small button">New Part</a>
+    </div>
   </div>
 </nav>
 
