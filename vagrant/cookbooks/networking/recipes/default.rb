@@ -28,7 +28,6 @@ iptables -t mangle -Z
 ########################################
 iptables -N SSH
 iptables -N HTTP
-iptables -N BAN
 
 
 ########################################
@@ -46,6 +45,7 @@ iptables -A INPUT -i eth+ -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i br+ -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 --match state --state NEW -j SSH
 iptables -A INPUT -p tcp --dport 80 --match state --state NEW -j HTTP
+iptables -A INPUT -p tcp --dport 3000 --match state --state NEW -j HTTP
 
 
 # SSH Chain
