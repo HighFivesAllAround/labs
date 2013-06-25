@@ -10,6 +10,7 @@ Labs.NewCommentView = Ember.View.extend({
   // feels as though there is a better way.
   //
   submit: function(e) {
+    e.preventDefault();
     var commentable = this.get("controller.model");
     var comment = commentable.get("comments").createRecord({content: this.commentBody});
     comment.save();
