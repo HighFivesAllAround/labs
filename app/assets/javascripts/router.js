@@ -9,9 +9,6 @@ Labs.Router.map(function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("revise");
     });
-    this.resource("parts", function() {
-      this.route("new");
-    });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
   });
 
@@ -33,12 +30,6 @@ Labs.IndexRoute = Ember.Route.extend({
 
 Labs.PartIndexRoute = Ember.Route.extend({
   model: function() { return this.modelFor("part"); },
-});
-
-Labs.PartsNewRoute = Ember.Route.extend({
-  model: function() {
-    return Labs.Part.createRecord({});
-  }
 });
 
 Labs.PartReviseRoute = Ember.Route.extend({
