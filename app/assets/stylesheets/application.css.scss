@@ -30,3 +30,32 @@
     vertical-align: middle;
   }
 }
+
+.comment {
+  margin-bottom: 6px;
+
+  img.avatar {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $secondary-color;
+  }
+
+  .content {
+    background-color: lighten($secondary-color, 6%);
+    position: relative;
+    padding: emCalc(20px);
+    padding-bottom: 0;
+    border: 1px solid $secondary-color;
+
+    a.delete {
+      top: 2px;
+      right: 2px;
+      position: absolute;
+      color: $secondary-color;
+
+      &:hover {
+        color: $primary-color !important;
+      }
+    }
+  }
+}
