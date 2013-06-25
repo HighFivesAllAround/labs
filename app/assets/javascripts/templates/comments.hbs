@@ -1,15 +1,13 @@
 {{#each comment in content}}
 
   <div class="row comment">
-    <div class="large-1 columns">
-      <!-- Yeah, I don't intend on keeping this placeholder icon -->
-      <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
-    </div>
 
-    <div class="large-11 columns content">
+    <div class="large-12 columns comment-content">
       <a href="#" class="delete" {{action "delete" comment}} aria-label="Delete">
         <i class="foundicon-remove"></i>
       </a>
+
+      <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
 
       <div class="formatted-text"> {{markdown comment.content}} </div>
     </div>

@@ -1,0 +1,28 @@
+@import "foundation/foundation-global";
+@import "foundation/components/buttons";
+
+.sub-top-bar {
+
+  background-color: $secondary-color;
+  padding: 10px 0;
+
+  * { margin-bottom: 0; }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  a.button {
+    @include button-style($bg:$secondary-color);
+  }
+
+  a.button.active {
+    @include button-style($bg:$primary-color);
+  }
+
+  .button-group {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
