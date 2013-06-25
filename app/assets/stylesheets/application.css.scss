@@ -1,10 +1,6 @@
 @import "foundation";
-
-// Foundation overrides
-//
-.top-bar {
-  margin-bottom: 0;
-}
+@import "foundation_overrides";
+@import "foundation_icons/general_foundicons";
 
 .inline-edit {
   padding-top: 10px;
