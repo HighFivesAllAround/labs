@@ -8,6 +8,9 @@ You need to install the following applications:
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant 1.2.2 or newer](http://downloads.vagrantup.com/)
 
+*Note*: Virtualbox 4.2.14 does NOT work with vagrant.
+Use version 4.2.12 until this problem is fixed.
+
 Edit `/etc/nfs.conf` to configure a static mountd port
 
 ```
