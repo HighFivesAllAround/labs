@@ -52,18 +52,47 @@ mv src/redis-server /usr/local/bin/
   EOH
 end
 
-bash "add scripts" do
-  cwd "#{build_path}/utils"
-  user "root"
-  code <<-EOH
-echo "6379" | ./install_server.sh
-  EOH
+user "redis" do
+  system true
 end
 
-service "redis_6379" do
-  action :stop
+directory "/var/lib/redis" do
+  owner "redis"
+  group "redis"
+  recursive true
+  mode 0755
 end
 
-service "redis_6379" do
-  action :start
+user "redis" do
+  system true
+  shell "/bin/bash"
+  home "/var/lib/redis"
+end
+
+group "redis" do
+  system true
+  members "redis"
+end
+
+directory "/etc/redis" do
+  owner "root"
+  group "root"
+  mode 0755
+end
+
+cookbook_file "/etc/redis/redis.conf" do
+  mode 0644
+  owner "root"
+  group "root"
+end
+
+cookbook_file "/etc/init/redis-server.conf" do
+  mode 0644
+  owner "root"
+  group "root"
+end
+
+service "redis-server" do
+  provider Chef::Provider::Service::Upstart
+  action :restart
 end
