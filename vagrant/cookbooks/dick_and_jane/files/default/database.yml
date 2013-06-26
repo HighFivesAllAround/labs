@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  database: dickandjane_development
+  min_messages: warning
+
+test:
+  adapter: postgresql
+  database: labs_test
+  min_messages: warning
