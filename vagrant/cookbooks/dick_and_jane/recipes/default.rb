@@ -12,6 +12,7 @@ cookbook_file "/home/ubuntu/dick_and_jane/config/database.yml" do
   mode 0644
   owner "ubuntu"
   group "ubuntu"
+  action :create_if_missing
 end
 
 bash "create db" do
