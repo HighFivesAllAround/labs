@@ -4,71 +4,20 @@ package "pkg-config"
 package "curl"
 package "libssl-dev"
 
-version    = "v0.10.11"
-cache_path = "/home/ubuntu/dick_and_jane/vagrant/assets/node-#{version}.tar.gz"
-unpack_path = "/tmp/node/#{version}"
-build_path = "#{unpack_path}/node-#{version}"
+package_name = "node.js"
+version      = "0.10.12"
+arch         = "amd64"
+debfile      = "#{package_name}_#{version}_#{arch}.deb"
+cache_path   = "/home/ubuntu/dick_and_jane/vagrant/assets/#{debfile}"
 
 remote_file cache_path do
-  source "http://nodejs.org/dist/v0.10.11/node-v0.10.11.tar.gz"
-  checksum "ee4b398efde1fa7a334435910447422dae58e93da8711602c2228485f2b58cb1"
+  source "http://provisioning.agrieser.net/debs/#{debfile}"
+  checksum "7a35f0aec896299a8c3cac9da415dc46ff7a5d68e170b4a8dcbd7ced615b3c5c"
   mode 0644
   action :create_if_missing
 end
 
-directory build_path do
-  owner "ubuntu"
-  group "ubuntu"
-  recursive true
-  action :delete
-end
-
-directory build_path do
-  owner "ubuntu"
-  group "ubuntu"
-  recursive true
-  action :create
-end
-
-bash "unpack" do
-  cwd unpack_path
-  user "ubuntu"
-  code <<-EOH
-tar -xzf #{cache_path}
-  EOH
-end
-
-bash "configure" do
-  cwd build_path
-  user "ubuntu"
-  code <<-EOH
-./configure --prefix=/opt/node
-  EOH
-end
-
-bash "compile" do
-  cwd build_path
-  user "ubuntu"
-  code <<-EOH
-make
-  EOH
-end
-
-bash "install" do
-  cwd build_path
-  user "root"
-  code <<-EOH
-rm -rf /opt/node
-make install
-  EOH
-end
-
-bash "link" do
-  cwd "/usr/local/bin"
-  user "root"
-  code <<-EOH
-ln -s /opt/node/bin/node
-ln -s /opt/node/bin/npm
-ln -s /opt/node/bin/node-waf
-  EOH
+dpkg_package "node.js" do
+  source cache_path
+  action :install
 end
