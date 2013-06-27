@@ -3,7 +3,7 @@ deb_path="/home/ubuntu/dick_and_jane/vagrant/assets"
 deb_file="${deb_path}/${deb_name}"
 
 if [ ! -f $deb_file ]; then
-  curl --silent --show-error "http://provisioning.agrieser.net/chef/${deb_name}" > $deb_file
+  curl --silent --show-error "http://provisioning.agrieser.net/debs/${deb_name}" > $deb_file
 fi
 
 cd $deb_path

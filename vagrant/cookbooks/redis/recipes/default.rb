@@ -1,55 +1,22 @@
 package "gcc"
 package "make"
 
-version    = "2.6.13"
-cache_path = "/home/ubuntu/dick_and_jane/vagrant/assets/redis-#{version}.tar.gz"
-unpack_path = "/tmp/redis/#{version}"
-build_path = "#{unpack_path}/redis-#{version}"
+package_name = "redis"
+version      = "2.6.14"
+arch         = "amd64"
+debfile      = "#{package_name}_#{version}_#{arch}.deb"
+cache_path   = "/home/ubuntu/dick_and_jane/vagrant/assets/#{debfile}"
 
 remote_file cache_path do
-  source "http://redis.googlecode.com/files/redis-2.6.13.tar.gz"
-  checksum "3b9439636c58ca06bee538a0f7298e02a33fcf98b8fa845c0b0cf8567751e948"
+  source "http://provisioning.agrieser.net/debs/#{debfile}"
+  checksum "729df7ac700857fddf3ca192f0fd2f27f09893f3f7c4d57dda52f44336248950"
   mode 0644
   action :create_if_missing
 end
 
-directory build_path do
-  owner "ubuntu"
-  group "ubuntu"
-  recursive true
-  action :delete
-end
-
-directory build_path do
-  owner "ubuntu"
-  group "ubuntu"
-  recursive true
-  action :create
-end
-
-bash "unpack" do
-  cwd unpack_path
-  user "ubuntu"
-  code <<-EOH
-tar -xzf #{cache_path}
-  EOH
-end
-
-bash "compile" do
-  cwd build_path
-  user "ubuntu"
-  code <<-EOH
-make
-  EOH
-end
-
-bash "install" do
-  cwd build_path
-  user "root"
-  code <<-EOH
-mv src/redis-cli /usr/local/bin/
-mv src/redis-server /usr/local/bin/
-  EOH
+dpkg_package "redis" do
+  source cache_path
+  action :install
 end
 
 user "redis" do
