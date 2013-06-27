@@ -27,14 +27,14 @@ package "pkg-config"
 package "libffi-dev"
 
 package_name = "ruby"
-version      = "2.0.0-p195"
+version      = "2.0.0-p247"
 arch         = "amd64"
 debfile      = "#{package_name}_#{version}_#{arch}.deb"
 cache_path   = "/home/ubuntu/dick_and_jane/vagrant/assets/#{debfile}"
 
 remote_file cache_path do
   source "http://provisioning.agrieser.net/debs/#{debfile}"
-  checksum "0866a053cdaa5a381e78c14acd8c973a17c4abe253ded86cbd3fc19e6ce7f88c"
+  checksum "3c07204d60b12fba15babe07741575f4d865bbf9ebbf7fa7d197b012ecfef569"
   mode 0644
   action :create_if_missing
 end
