@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'active_model_serializers'
 gem 'ember-rails', :git => "git://github.com/emberjs/ember-rails.git", :branch => "master"
-gem 'ember-source', '1.0.0.rc5'
+gem 'ember-source', '1.0.0.rc6'
 gem 'jquery-rails'
 gem 'pg'
 gem 'rails', '4.0.0'
