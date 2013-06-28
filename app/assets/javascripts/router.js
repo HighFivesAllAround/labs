@@ -7,7 +7,7 @@ Labs.Router.map(function() {
 
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
-      this.route("revise");
+      this.route("edit");
     });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
   });
@@ -20,10 +20,9 @@ Labs.Router.map(function() {
 
 Labs.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    var projects = Labs.Project.find({});
     var self = this;
-    projects.on("didLoad", function() {
-      self.transitionTo("project", projects.toArray()[0]);
+    Labs.Project.find({}).onLoad(function(projects) {
+      self.transitionTo("project.index", projects.toArray()[0]);
     });
   }
 });
@@ -32,16 +31,20 @@ Labs.PartIndexRoute = Ember.Route.extend({
   model: function() { return this.modelFor("part"); },
 });
 
-Labs.PartReviseRoute = Ember.Route.extend({
-  setupController: function() {
-    var part = this.modelFor("part");
-
-    var suggestion = Labs.Suggestion.createRecord({
-      project: this.modelFor("project"),
-      part: part,
-      content: part.get("content")
+Labs.PartEditRoute = Ember.Route.extend({
+  activate: function() {
+    var partController = this.controllerFor("part");
+    var editController = this.controllerFor("part.edit");
+    partController.set("editing", true);
+    partController.get("model").onLoad(function(model) {
+      var modelCopy = Ember.Object.create();
+      editController.get("editableProperties").forEach(function(key) {
+        modelCopy.set(key, model.get(key));
+      });
+      editController.set("model", modelCopy);
     });
-
-    this.set("controller.model", suggestion);
+  },
+  deactivate: function() {
+    this.controllerFor("part").set("editing", false);
   }
 });

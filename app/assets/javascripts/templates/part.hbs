@@ -1,15 +1,12 @@
 <div class="row">
-  {{#if view.editingTitle}}
-    <div class="large-2 columns inline-edit">
-      {{input valueBinding="view.titleCopy"}}
+    <div class="large-10 columns">
+      <h3>{{model.title}}</h3>
     </div>
-    <div {{action "toggleTitleEdit" target="view"}} class="large-10 columns inline-edit">
-      <a {{action "save" target="view"}} class="button small">Save</a>
-      <a class="button small">Cancel</a>
-    </div>
-  {{else}}
-    <h3 {{action "toggleTitleEdit" target="view"}}>{{model.title}}</h3>
-  {{/if}}
+    {{#unless editing}}
+      <div class="large-2 columns">
+        {{#linkTo "part.edit" class="button small right spacing-top"}} Edit {{/linkTo}}
+      </div>
+    {{/unless}}
 </div>
 
 <div class="row">
