@@ -21,3 +21,4 @@ pickle-email-*.html
 .project
 /.vagrant
 /vagrant/assets/
+/node_modules

@@ -1,0 +1,20 @@
+{
+  "name": "dick_and_jane",
+  "version": "0.0.0",
+  "description": "Getting a dev machine set up is fairly straightforward. These instructions assume an OSX host.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HighFivesAllAround/labs.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-cli": "0.1.9",
+    "grunt-contrib-watch": "0.4.4",
+    "grunt-contrib-jshint": "0.6.0"
+  }
+}
