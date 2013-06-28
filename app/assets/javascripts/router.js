@@ -1,4 +1,4 @@
-Labs.Router.reopen({ location: 'history' });
+Labs.Router.reopen({ location: "history" });
 
 // Route Definitions
 //
@@ -23,10 +23,10 @@ Labs.Router.map(function() {
 
 Labs.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    var projects = Labs.Project.find({})
+    var projects = Labs.Project.find({});
     var self = this;
     projects.on("didLoad", function() {
-      self.transitionTo('project', projects.toArray()[0]);
+      self.transitionTo("project", projects.toArray()[0]);
     });
   }
 });
