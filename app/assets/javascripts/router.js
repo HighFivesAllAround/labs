@@ -6,6 +6,7 @@ Labs.Router.reopen({ location: "history" });
 Labs.Router.map(function() {
 
   this.resource("project", { path: "/projects/:project_id" }, function() {
+    this.route("feed");
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("revise");
     });
