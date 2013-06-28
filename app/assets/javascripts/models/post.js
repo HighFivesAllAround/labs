@@ -1,4 +1,4 @@
-Labs.Post = DS.Model.extend({
+Labs.Post = Labs.Commentable.extend({
 
   content: DS.attr("string"),
 
