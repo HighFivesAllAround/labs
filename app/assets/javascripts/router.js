@@ -6,7 +6,6 @@ Labs.Router.reopen({ location: "history" });
 Labs.Router.map(function() {
 
   this.resource("project", { path: "/projects/:project_id" }, function() {
-    this.route("feed");
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("revise");
     });
@@ -30,6 +29,10 @@ Labs.IndexRoute = Ember.Route.extend({
       self.transitionTo("project", projects.toArray()[0]);
     });
   }
+});
+
+Labs.ProjectIndexRoute = Ember.Route.extend({
+  model: function() { return this.modelFor("project"); },
 });
 
 Labs.PartIndexRoute = Ember.Route.extend({
