@@ -7,6 +7,7 @@
 //
 //= require_self
 //
+//= require ./duckpunch
 //= require ./store
 //= require_tree ./models
 //= require_tree ./controllers

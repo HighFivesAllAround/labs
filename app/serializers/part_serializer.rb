@@ -5,6 +5,6 @@ class PartSerializer < ActiveModel::Serializer
 
   embed :ids, :include => true
 
-  attributes :id, :title, :content
+  attributes :id, :title, :content, :project_id
 
 end

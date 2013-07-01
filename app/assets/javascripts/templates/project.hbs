@@ -2,12 +2,7 @@
   <div class="row">
     <h2 class="left"> {{model.name}} </h2>
     <div class="right">
-      <ul class="button-group">
-        {{#each part in model.sortedParts}}
-          <li> {{#linkTo "part" part class="small button"}} {{part.title}} {{/linkTo}} </li>
-        {{/each}}
-      </ul>
-      {{#linkTo "parts.new" class="small button"}}New Part{{/linkTo}}
+      {{render "parts" model.parts}}
     </div>
   </div>
 </nav>
