@@ -5,5 +5,6 @@ class ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name
 
   has_many :parts
+  has_many :posts
 
 end
