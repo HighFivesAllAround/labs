@@ -1,15 +1,17 @@
-{{#each post in content}}
+{{view "Labs.NewPostView"}}
+
+{{#each controller}}
 
   <div class="row comment">
 
     <div class="large-12 columns comment-content">
-      <a href="#" class="delete" {{action "delete" post}} aria-label="Delete">
+      <a href="#" class="delete" {{action "delete" this}} aria-label="Delete">
         <i class="foundicon-remove"></i>
       </a>
 
       <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
 
-      <div class="formatted-text"> {{markdown post.content}} </div>
+      <div class="formatted-text"> {{markdown content}} </div>
     </div>
   </div>
 

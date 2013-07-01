@@ -4,6 +4,6 @@ class PostSerializer < ActiveModel::Serializer
 
   embed :ids, :include => true
 
-  attributes :id, :content
+  attributes :id, :content, :project_id
 
 end
