@@ -1,10 +1,11 @@
 <div class="row">
-    <div class="large-10 columns">
+    <div class="large-8 columns">
       <h3>{{model.title}}</h3>
     </div>
     {{#unless editing}}
-      <div class="large-2 columns">
+      <div class="large-4 columns">
         {{#linkTo "part.edit" class="button small right spacing-top"}} Edit {{/linkTo}}
+        {{#linkTo "part.suggestion" class="button small right spacing-top"}} Suggestion {{/linkTo}}
       </div>
     {{/unless}}
 </div>

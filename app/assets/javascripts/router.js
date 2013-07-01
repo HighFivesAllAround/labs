@@ -8,6 +8,7 @@ Labs.Router.map(function() {
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("edit");
+      this.route("suggestion");
     });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
   });
@@ -46,5 +47,21 @@ Labs.PartEditRoute = Ember.Route.extend({
   },
   deactivate: function() {
     this.controllerFor("part").set("editing", false);
+  }
+});
+
+Labs.PartSuggestionRoute = Ember.Route.extend({
+  activate: function() {
+    var partController = this.controllerFor("part");
+    partController.set("editing", true);
+  },
+  deactivate: function() {
+    var partController = this.controllerFor("part");
+    partController.set("editing", false);
+  },
+  setupController: function() {
+    var controller = this.get("controller");
+    var content = controller.get("controllers.part.model.content");
+    controller.set("model", { content: content });
   }
 });

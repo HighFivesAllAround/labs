@@ -18,7 +18,6 @@ Labs.PartEditController = Ember.ObjectController.extend({
 
   destroy: function() {
     var model = this.get("part.model");
-    var content = this.get("part").content;
     model.deleteRecord();
     model.save();
 
