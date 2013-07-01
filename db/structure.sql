@@ -95,6 +95,38 @@ ALTER SEQUENCE parts_id_seq OWNED BY parts.id;
 
 
 --
+-- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE posts (
+    id integer NOT NULL,
+    content text,
+    project_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -184,6 +216,13 @@ ALTER TABLE ONLY parts ALTER COLUMN id SET DEFAULT nextval('parts_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -208,6 +247,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY parts
     ADD CONSTRAINT parts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
 
 
 --
@@ -267,3 +314,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611161505');
 INSERT INTO schema_migrations (version) VALUES ('20130611162150');
 
 INSERT INTO schema_migrations (version) VALUES ('20130611162319');
+
+INSERT INTO schema_migrations (version) VALUES ('20130628015023');
