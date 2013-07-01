@@ -4,12 +4,4 @@ Labs.Project = DS.Model.extend({
 
   parts: DS.hasMany("Labs.Part"),
 
-  sortedParts: function() {
-    return Ember.ArrayProxy.create({
-      content: this.get("parts").toArray().sort(function(a, b) {
-        return a.id - b.id;
-      })
-    });
-  }.property("parts", "parts.@each.isLoaded")
-
 });

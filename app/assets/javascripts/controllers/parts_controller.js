@@ -1,9 +1,15 @@
-Labs.ProjectController = Ember.ObjectController.extend({
+Labs.PartsController = Ember.ArrayController.extend({
 
-  createPart: function() {
+  needs: "project",
+  project: null,
+  projectBinding: "controllers.project",
+  sortProperties: [ "id" ],
+  sortAscending: true,
+
+  create: function() {
     var self = this;
     var key = "createPartObserver";
-    var project = this.get("model");
+    var project = this.get("project.model");
     var part = project.get("parts").createRecord({ title: "New Part" });
     part.save();
     part.addObserver("id", key, function() {
