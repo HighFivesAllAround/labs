@@ -7,10 +7,8 @@ Labs.Router.map(function() {
 
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
-      this.route("revise");
-    });
-    this.resource("parts", function() {
-      this.route("new");
+      this.route("edit");
+      this.route("suggestion");
     });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
   });
@@ -23,10 +21,9 @@ Labs.Router.map(function() {
 
 Labs.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    var projects = Labs.Project.find({});
     var self = this;
-    projects.on("didLoad", function() {
-      self.transitionTo("project", projects.toArray()[0]);
+    Labs.Project.find({}).onLoad(function(projects) {
+      self.transitionTo("project.index", projects.toArray()[0]);
     });
   }
 });
@@ -39,22 +36,36 @@ Labs.PartIndexRoute = Ember.Route.extend({
   model: function() { return this.modelFor("part"); },
 });
 
-Labs.PartsNewRoute = Ember.Route.extend({
-  model: function() {
-    return Labs.Part.createRecord({});
+Labs.PartEditRoute = Ember.Route.extend({
+  activate: function() {
+    var partController = this.controllerFor("part");
+    var editController = this.controllerFor("part.edit");
+    partController.set("editing", true);
+    partController.get("model").onLoad(function(model) {
+      var modelCopy = Ember.Object.create();
+      editController.get("editableProperties").forEach(function(key) {
+        modelCopy.set(key, model.get(key));
+      });
+      editController.set("model", modelCopy);
+    });
+  },
+  deactivate: function() {
+    this.controllerFor("part").set("editing", false);
   }
 });
 
-Labs.PartReviseRoute = Ember.Route.extend({
+Labs.PartSuggestionRoute = Ember.Route.extend({
+  activate: function() {
+    var partController = this.controllerFor("part");
+    partController.set("editing", true);
+  },
+  deactivate: function() {
+    var partController = this.controllerFor("part");
+    partController.set("editing", false);
+  },
   setupController: function() {
-    var part = this.modelFor("part");
-
-    var suggestion = Labs.Suggestion.createRecord({
-      project: this.modelFor("project"),
-      part: part,
-      content: part.get("content")
-    });
-
-    this.set("controller.model", suggestion);
+    var controller = this.get("controller");
+    var content = controller.get("controllers.part.model.content");
+    controller.set("model", { content: content });
   }
 });

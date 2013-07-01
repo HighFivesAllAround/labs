@@ -1,0 +1,6 @@
+<ul class="button-group">
+  {{#each controller}}
+    <li> {{#linkTo "part" this class="small button"}} {{title}} {{/linkTo}} </li>
+  {{/each}}
+</ul>
+<a {{action create}} class="small button">New Part</a>

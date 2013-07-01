@@ -1,15 +1,13 @@
 <div class="row">
-  {{#if view.editingTitle}}
-    <div class="large-2 columns inline-edit">
-      {{input valueBinding="view.titleCopy"}}
+    <div class="large-8 columns">
+      <h3>{{model.title}}</h3>
     </div>
-    <div {{action "toggleTitleEdit" target="view"}} class="large-10 columns inline-edit">
-      <a {{action "save" target="view"}} class="button small">Save</a>
-      <a class="button small">Cancel</a>
-    </div>
-  {{else}}
-    <h3 {{action "toggleTitleEdit" target="view"}}>{{model.title}}</h3>
-  {{/if}}
+    {{#unless editing}}
+      <div class="large-4 columns">
+        {{#linkTo "part.edit" class="button small right spacing-top"}} Edit {{/linkTo}}
+        {{#linkTo "part.suggestion" class="button small right spacing-top"}} Suggestion {{/linkTo}}
+      </div>
+    {{/unless}}
 </div>
 
 <div class="row">
@@ -30,5 +28,10 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="large-12 columns">
+    <h5>Comments</h5>
+  </div>
+</div>
 {{render "comments" model.comments}}
 {{view "Labs.NewCommentView"}}

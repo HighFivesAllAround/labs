@@ -1,0 +1,15 @@
+{{markdown part.model.content}}
+<div class="panel">
+  <div class="row">
+    <div class="large-12 column">
+      {{textarea valueBinding="model.content"}}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    {{#linkTo "part.index" part class="button small secondary left"}} Cancel {{/linkTo}}
+    <button class="btn small right" {{action "create"}}>Create</button>
+  </div>
+</div>
