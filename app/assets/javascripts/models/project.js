@@ -10,6 +10,6 @@ Labs.Project = DS.Model.extend({
         return a.id - b.id;
       })
     });
-  }.property("parts")
+  }.property("parts", "parts.@each.isLoaded")
 
 });
