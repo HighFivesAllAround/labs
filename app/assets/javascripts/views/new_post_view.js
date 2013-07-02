@@ -16,11 +16,10 @@ Labs.NewPostView = Ember.View.extend({
   keyDown: function(e) {
     var expression = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;
     var regex = new RegExp(expression);
-    var input = this.$().val();
+    var input = this.$("textarea").val();
     var matches = input.match(regex);
 
     if (matches && matches[0]) {
-      this.set("isPreviewing", true);
       this.fetchOembedData(matches[0]);
     }
   },
@@ -33,6 +32,7 @@ Labs.NewPostView = Ember.View.extend({
 
   fetchOembedData: function(embedUrl) {
     $.embedly.oembed(embedUrl, {key: 'f3a6ced6ff1e4b9b964d8a6a73088200'}).progress(function(data) {
+      this.set("isPreviewing", true);
       this.setProperties({
         title: data.title,
         description: data.description,
