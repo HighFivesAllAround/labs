@@ -1,5 +1,5 @@
 deb_name="chef_11.4.4-2.ubuntu.11.04_amd64.deb"
-deb_path="/home/ubuntu/dick_and_jane/vagrant/assets"
+deb_path="/home/ubuntu/labs/vagrant/assets"
 deb_file="${deb_path}/${deb_name}"
 
 if [ ! -f $deb_file ]; then

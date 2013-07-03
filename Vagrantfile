@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :public_network
   config.vm.network :private_network, ip: "10.24.48.96"
   config.vm.hostname = "#{Etc.getlogin}-#{Time.new.strftime("%s")}"
-  config.vm.synced_folder ".", "/home/ubuntu/dick_and_jane", nfs: true
+  config.vm.synced_folder ".", "/home/ubuntu/labs", nfs: true
   # add the following line to /etc/nfs.conf on osx
   # nfs.server.mount.port = 1022
 
@@ -31,6 +31,6 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "redis"
     chef.add_recipe "ruby"
     chef.add_recipe "node"
-    chef.add_recipe "dick_and_jane"
+    chef.add_recipe "labs"
   end
 end
