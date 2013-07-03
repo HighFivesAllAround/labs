@@ -17,6 +17,7 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 after "deploy", "deploy:cleanup"
+after 'deploy:cleanup', 'deploy:assets:cleanup'
 
 namespace :deploy do
   task :setup_config, roles: :app do
@@ -39,4 +40,10 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+
+  namespace :assets do
+    task :cleanup do
+      run "./bin/rake 'assets:clean'"
+    end
+  end
 end
