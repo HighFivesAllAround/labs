@@ -4,6 +4,7 @@
 //= require ember
 //= require ember-data
 //= require showdown
+//= require moment
 //
 //= require_self
 //
