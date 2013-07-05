@@ -1,6 +1,6 @@
 {{#each comment in content}}
 
-  <div class="row comment">
+  <div class="row comment" {{bindAttr id="comment.anchor"}}>
 
     <div class="large-12 columns comment-content">
       <a href="#" class="delete" {{action "delete" comment}} aria-label="Delete">
