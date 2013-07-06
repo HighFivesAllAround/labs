@@ -1,16 +1,25 @@
 {{#each comment in content}}
 
-  <div class="row comment">
+  <div class="row comment" {{bindAttr id="comment.domId"}}>
 
-    <div class="large-12 columns comment-content">
-      <a href="#" class="delete" {{action "delete" comment}} aria-label="Delete">
-        <i class="foundicon-remove"></i>
-      </a>
+    <!-- Comment Header -->
+    <div class="comment-header large-12 columns">
+      <div class="comment-header-info">
+        <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
+        <span>Dick Jane</span> <!-- not a link since profile isn't implemented -->
+      </div>
 
-      <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
-
-      <div class="formatted-text"> {{markdown comment.content}} </div>
+      <div class="comment-header-actions">
+        <a class="comment-date" {{bindAttr href="comment.anchor"}}>{{comment.timeAgo}}</a>
+        <a href="#" class="delete" {{action "delete" comment}} aria-label="Delete">
+          <i class="foundicon-remove"></i>
+        </a>
+      </div>
     </div>
+
+    <!-- Comment Body -->
+    <div class="large-12 columns comment-body"> {{markdown comment.content}} </div>
+
   </div>
 
 {{/each}}
