@@ -4,15 +4,22 @@
 
   <div class="row comment">
 
-    <div class="large-12 columns comment-content">
-      <a href="#" class="delete" {{action "delete" this}} aria-label="Delete">
-        <i class="foundicon-remove"></i>
-      </a>
+    <!-- Post Header -->
+    <div class="comment-header large-12 columns">
+      <div class="comment-header-info">
+        <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
+        <span>Dick Jane</span> <!-- not a link since profile isn't implemented -->
+      </div>
 
-      <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
-
-      <div class="formatted-text"> {{markdown content}} </div>
+      <div class="comment-header-actions">
+        <a href="#" class="delete" {{action "delete" this}} aria-label="Delete">
+          <i class="foundicon-remove"></i>
+        </a>
+      </div>
     </div>
+
+    <!-- Comment Body -->
+    <div class="large-12 columns comment-body"> {{markdown this.content}} </div>
   </div>
 
 {{/each}}
