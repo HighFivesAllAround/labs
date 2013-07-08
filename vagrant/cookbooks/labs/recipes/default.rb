@@ -19,13 +19,5 @@ cookbook_file "/etc/init/app-labs.conf" do
   mode 0644
   owner "root"
   group "root"
-  action :create_if_missing
-end
-
-bash "create db" do
-  cwd "/home/ubuntu/labs"
-  user "ubuntu"
-  code <<-EOH
-bundle exec rake db:create
-  EOH
+  action :create
 end
