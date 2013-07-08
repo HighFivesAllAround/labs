@@ -1,0 +1,13 @@
+{
+  "run_list": [
+    "recipe[apt]",
+    "recipe[base]",
+    "recipe[networking]",
+    "recipe[postgres]",
+    "recipe[nginx]",
+    "recipe[redis]",
+    "recipe[ruby]",
+    "recipe[node]",
+    "recipe[labs]"
+  ]
+}

@@ -51,3 +51,30 @@ Notes:
 * Gems are installed locally via bundler into the vendor directory
 * Per Rails 4 conventions, bins are installed and checked into ./bin, so running the server looks like `./bin/rails server`
 * Vagrant is set up with nfs because of [performance problems](http://docs-v1.vagrantup.com/v1/docs/nfs.html) with virtualbox's built in drive mapping.
+
+## Setting up a production instance
+On your local machine:
+```
+git archive master > ../labs.tar
+scp ../labs.tar root@remote-server:
+```
+
+On the remote machine (as root)
+```
+wget http://provisioning.agrieser.net/debs/chef_11.4.4-2.ubuntu.11.04_amd64.deb
+dpkg -i chef_11.4.4-2.ubuntu.11.04_amd64.deb
+mkdir labs
+cd labs
+tar -xf ../labs.tar
+cd vagrant
+chef-solo -c solo.rb -j solo.json
+```
+
+Then set up the directory structure
+```
+cap deploy:setup
+```
+
+Copy the following files into place
+
+* `config/database.yml`
