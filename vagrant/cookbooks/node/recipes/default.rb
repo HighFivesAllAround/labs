@@ -8,7 +8,7 @@ package_name = "node.js"
 version      = "0.10.12"
 arch         = "amd64"
 debfile      = "#{package_name}_#{version}_#{arch}.deb"
-cache_path   = "/home/ubuntu/dick_and_jane/vagrant/assets/#{debfile}"
+cache_path   = "/home/ubuntu/labs/vagrant/assets/#{debfile}"
 
 remote_file cache_path do
   source "http://provisioning.agrieser.net/debs/#{debfile}"

@@ -1,35 +1,60 @@
 @import "foundation/foundation-global";
 
+$lighter-secondary-color: lighten($secondary-color, 6%);
+$darker-secondary-color: #b1b1b1;
+$light-red: #ff6666;
+
 .comment {
+  border: 1px solid $secondary-color;
+  padding: 0;
+  background-color: $lighter-secondary-color;
   margin-bottom: 6px;
 
-  img.avatar {
-    width: 32px;
-    height: 32px;
-    border: 1px solid $secondary-color;
-    float: left;
+  .comment-body {
+    margin: emCalc(15px) 0 0 0;
   }
 
-  .comment-content {
-    background-color: lighten($secondary-color, 6%);
-    position: relative;
-    padding: emCalc(20px);
-    padding-bottom: 0;
-    border: 1px solid $secondary-color;
+  .comment-header {
+    line-height: 36px;
+    background-color: $secondary-color;
 
-    a.delete {
-      top: 2px;
-      right: 2px;
-      position: absolute;
-      color: $secondary-color;
+    a {
+      font-weight: lighter;
+      vertical-align: middle;
+    }
 
-      &:hover {
-        color: $primary-color;
+    .comment-header-info {
+      float: left;
+
+      img.avatar {
+        line-height: 36px;
+        width: 32px;
+        height: 32px;
+        border: 1px solid $darker-secondary-color;
+        vertical-align: middle;
       }
     }
 
-    .formatted-text {
-      margin-left: emCalc(52px);
+    .comment-header-actions {
+      float: right;
+
+      a.delete {
+        color: $darker-secondary-color;
+        &:hover {
+          color: $light-red;
+        }
+      }
+
+      a.comment-date {
+        font-size: 12px;
+        font-weight: lighter;
+        padding-right: 10px;
+        text-decoration: none;
+        color: $darker-secondary-color;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

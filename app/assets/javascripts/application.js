@@ -5,6 +5,7 @@
 //= require ember-data
 //= require showdown
 //= require jquery.embedly
+//= require moment
 //
 //= require_self
 //

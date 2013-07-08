@@ -13,7 +13,7 @@ class Api::PartsController < ApplicationController
 
   def update
     part = Part.find(params[:id])
-    part.update(params.require(:part).permit(:title))
+    part.update(part_params)
     respond_with(:api, part)
   end
 
