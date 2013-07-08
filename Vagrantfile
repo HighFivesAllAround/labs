@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "vagrant/cookbooks"
     chef.add_recipe "apt"
+    chef.add_recipe "base"
     chef.add_recipe "networking"
     chef.add_recipe "postgres"
     chef.add_recipe "nginx"
@@ -32,5 +33,6 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "ruby"
     chef.add_recipe "node"
     chef.add_recipe "labs"
+    chef.add_recipe "labs-dev"
   end
 end
