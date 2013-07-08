@@ -18,7 +18,6 @@ default_run_options[:pty] = true
 
 after "deploy", "deploy:cleanup"
 after "deploy", "deploy:restart"
-after "deploy:cleanup", "deploy:assets:cleanup"
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -45,10 +44,4 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
-
-  namespace :assets do
-    task :cleanup do
-      run "./bin/rake 'assets:clean'"
-    end
-  end
 end
