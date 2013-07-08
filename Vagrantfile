@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.ssh.username = "ubuntu"
-  config.ssh.private_key_path = "vagrant/assets/keys/id_rsa"
+  config.ssh.private_key_path = "vagrant/cookbooks/labs-dev/files/default/id_rsa"
 
   config.vm.provision :shell, path: "vagrant/assets/chef_bootstrap.sh"
   config.vm.provision "chef_solo" do |chef|
