@@ -14,7 +14,3 @@ gem 'zurb-foundation', '~> 4.0.0'
 group :development do
   gem 'capistrano'
 end
-
-group :doc do
-  gem 'sdoc', require: false
-end
