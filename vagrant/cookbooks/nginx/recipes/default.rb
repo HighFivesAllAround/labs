@@ -1,6 +1,6 @@
 package "nginx"
 
-cookbook_file "/etc/nginx/sites-available/unicorn.conf" do
+cookbook_file "/etc/nginx/sites-available/labs.conf" do
   mode 0644
   owner "root"
   group "root"
