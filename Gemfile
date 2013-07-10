@@ -11,6 +11,7 @@ gem 'uglifier', '~> 2.1'
 gem 'unicorn', '4.6.2'
 gem 'zurb-foundation', '~> 4.0.0'
 gem 'bcrypt-ruby', '~>3.0.0'
+gem 'kaminari'
 
 group :development do
   gem 'capistrano'
