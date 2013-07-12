@@ -1,9 +1,17 @@
-<div class="row">
+<div class="large-12">
   <form>
     {{textarea valueBinding="view.postBody"}}
+    {{#view view.postPreview}}
+      <div class="large-2 columns">
+        <img {{bindAttr src="view.parentView.thumbnailUrl"}} height="100px" width="100px" />
+      </div>
+
+      <div class="large-10 columns">
+        <h5>{{view.parentView.title}}</h5>
+        <p>{{view.parentView.description}}</p>
+      </div>
+    {{/view}}
+
     <input type="submit" class="right small button" value="Share">
   </form>
-  {{#view view.postPreview}}
-    previewing post oembed
-  {{/view}}
 </div>
