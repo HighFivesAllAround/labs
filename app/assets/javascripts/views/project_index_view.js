@@ -2,14 +2,12 @@ Labs.ProjectIndexView = Ember.View.extend({
 
   templateName: "project/index",
   didInsertElement: function() {
-    this.set("controller.postRequestsQueued", 1);
+    this.get("controller").loadMorePosts();
   },
-  addPostsObserer: function() {
+  addPostsObserver: function() {
     // Load more until content goes off the screen
-    if (document.body.scrollHeight > document.body.offsetHeight) {
-      if (this.get("controller.postRequestsQueued") === 0) {
-        this.set("controller.postRequestsQueued", 1);
-      }
+    if (document.body.offsetHeight < window.screen.height) {
+      this.get("controller").loadMorePosts();
     }
   }.observes("controller.model.posts.length")
 

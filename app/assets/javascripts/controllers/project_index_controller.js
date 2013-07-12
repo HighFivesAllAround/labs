@@ -2,30 +2,22 @@ Labs.ProjectIndexController = Ember.ObjectController.extend({
 
   postPageNumber: 0,
   postRequestsInflight: 0,
-  postRequestsQueued: 0,
 
-  loadPostsObserver: function() {
-    var self = this;
-    var inFlight = this.get("postRequestsInflight");
-    var queued = this.get("postRequestsQueued");
-    if (inFlight || queued === 0) { return; }
-
-    this.set("postRequestsInflight", inFlight + 1);
+  loadMorePosts: function() {
+    var self      = this;
+    var flightKey = "postRequestsInflight";
+    var pageKey   = "postPageNumber";
     this.get("model").onLoad(function(model) {
-      var page = self.get("postPageNumber") + 1;
-      self.set("postPageNumber", page);
-      Labs.Post.find({ project_id: model.get("id"), page: page }).onLoad(function(posts) {
+      if (self.get(flightKey)) { return; }
+      self.set(flightKey, self.get(flightKey) + 1);
+      self.set(pageKey, self.get(pageKey) + 1);
+      Labs.Post.find({ project_id: model.get("id"), page: self.get(pageKey) }).onLoad(function(posts) {
         posts.forEach(function(post) {
           model.get("posts").pushObject(post);
         });
-        self.set("postRequestsQueued", self.get("postRequestsQueued") - 1);
-        self.set("postRequestsInflight", self.get("postRequestsInflight") - 1);
+        self.set(flightKey, self.get(flightKey) - 1);
       });
     });
-  }.observes("postRequestsInflight", "postRequestsQueued"),
-
-  loadMorePosts: function() {
-    this.set("postRequestsQueued", this.get("postRequestsQueued") + 1);
   }
 
 });
