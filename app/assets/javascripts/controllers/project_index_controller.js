@@ -1,11 +1,11 @@
 Labs.ProjectIndexController = Ember.ObjectController.extend({
 
   postPageNumber: 0,
-  postRequestsInflight: 0,
+  postRequestsInFlight: 0,
 
   loadMorePosts: function() {
     var self      = this;
-    var flightKey = "postRequestsInflight";
+    var flightKey = "postRequestsInFlight";
     var pageKey   = "postPageNumber";
     this.get("model").onLoad(function(model) {
       if (self.get(flightKey)) { return; }
