@@ -14,18 +14,6 @@ Labs.NewPostView = Ember.View.extend({
   inFlight: false,
   cache: {},
 
-  previewUrlObserver: function(e) {
-    var self = this;
-    var tid = this.get("tid");
-    clearTimeout(tid);
-    this.set("tid", setTimeout(function() {
-      var matches = self.get("postBody").match(self.urlRegexp);
-      if (matches && matches[0] && !self.get("inFlight")) {
-        self.fetchPreviewableContent(matches[0]);
-      }
-    }, 2000));
-  }.observes("postBody"),
-
   submit: function(e) {
     e.preventDefault();
     this.get("controller").create({
@@ -39,10 +27,22 @@ Labs.NewPostView = Ember.View.extend({
     this.set("postBody", "");
   },
 
+  previewUrlObserver: function(e) {
+    var self = this;
+    var tid = this.get("tid");
+    clearTimeout(tid);
+    this.set("tid", setTimeout(function() {
+      var matches = self.get("postBody").match(self.urlRegexp);
+      if (matches && matches[0] && !self.get("inFlight")) {
+        self.fetchPreviewableContent(matches[0]);
+      }
+    }, 2000));
+  }.observes("postBody"),
+
   fetchPreviewableContent: function(embedUrl) {
     var cachedData = this.get("cache")[embedUrl];
     if (cachedData) {
-      this.setMetadata(cachedData);
+      this.setProperties(this.extractMetadata(cachedData));
     } else {
       var self = this;
       this.set("isPreviewing", true);
@@ -69,9 +69,34 @@ Labs.NewPostView = Ember.View.extend({
 
     classNames: ["row", "post-preview"],
     isVisible: false,
+    spinner: new Spinner(),
+
+    loading: function() {
+      var spinner = this.get("spinner");
+      if (this.get("parentView.inFlight")) {
+        spinner.spin(this.$()[0]);
+      } else {
+        spinner.stop();
+      }
+    }.observes("parentView.inFlight"),
+
+    cancel: function() {
+      this.set("parentView.isPreviewing", false);
+    },
 
     showOnce: function() {
-      this.set("isVisible", this.get("parentView.isPreviewing"));
+      if (this.get("parentView.isPreviewing")) {
+        this.set("isVisible", true);
+      } else {
+        this.set("parentView").setProperties({
+          title: null,
+          description: null,
+          originalUrl: null,
+          thumbnailUrl: null,
+          html: null
+        });
+        this.removeFromParent();
+      }
     }.observes("parentView.isPreviewing")
   })
 });
