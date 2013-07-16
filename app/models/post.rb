@@ -6,4 +6,8 @@ class Post < ActiveRecord::Base
 
   validates :content, :presence => true
 
+  store :metadata,
+    :accessors => [:title, :description, :original_url, :thumbnail_url, :html],
+    :coder => JSON
+
 end

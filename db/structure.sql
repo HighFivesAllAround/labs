@@ -103,7 +103,8 @@ CREATE TABLE posts (
     content text,
     project_id integer,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    metadata text
 );
 
 
@@ -316,3 +317,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611162150');
 INSERT INTO schema_migrations (version) VALUES ('20130611162319');
 
 INSERT INTO schema_migrations (version) VALUES ('20130628015023');
+
+INSERT INTO schema_migrations (version) VALUES ('20130701024831');

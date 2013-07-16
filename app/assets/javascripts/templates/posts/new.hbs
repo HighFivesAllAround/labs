@@ -1,6 +1,20 @@
-<div class="row">
+<div class="large-12">
   <form>
     {{textarea valueBinding="view.postBody"}}
+    {{#view view.postPreview class="preview"}}
+      <div class="large-2 columns">
+        <img {{bindAttr src="view.parentView.thumbnailUrl"}} height="100px" width="100px" />
+      </div>
+
+      <div class="large-10 columns">
+        <a href="#" class="right cancel" {{action "cancel" comment target="view"}} aria-label="Cancel">
+          <i class="foundicon-remove"></i>
+        </a>
+        <h5>{{view.parentView.title}}</h5>
+        <p>{{view.parentView.description}}</p>
+      </div>
+    {{/view}}
+
     <input type="submit" class="right small button" value="Share">
   </form>
 </div>

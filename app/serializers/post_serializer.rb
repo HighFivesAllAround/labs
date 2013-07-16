@@ -6,4 +6,7 @@ class PostSerializer < ActiveModel::Serializer
 
   attributes :id, :content, :project_id
 
+  # oembed metadata
+  attributes :title, :description, :original_url, :thumbnail_url, :html
+
 end
