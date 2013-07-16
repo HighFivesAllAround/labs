@@ -22,7 +22,7 @@ Labs.Router.map(function() {
 Labs.IndexRoute = Ember.Route.extend({
   redirect: function() {
     var self = this;
-    Labs.Project.find({}).onLoad(function(projects) {
+    Labs.Project.find({}).then(function(projects) {
       self.transitionTo("project.index", projects.toArray()[0]);
     });
   }
@@ -41,7 +41,7 @@ Labs.PartEditRoute = Ember.Route.extend({
     var partController = this.controllerFor("part");
     var editController = this.controllerFor("part.edit");
     partController.set("editing", true);
-    partController.get("model").onLoad(function(model) {
+    partController.get("model").then(function(model) {
       var modelCopy = Ember.Object.create();
       editController.get("editableProperties").forEach(function(key) {
         modelCopy.set(key, model.get(key));
