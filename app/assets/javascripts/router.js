@@ -29,7 +29,11 @@ Labs.IndexRoute = Ember.Route.extend({
 });
 
 Labs.ProjectIndexRoute = Ember.Route.extend({
-  model: function() { return this.modelFor("project"); }
+  model: function() { return this.modelFor("project"); },
+  setupController: function(controller, model) {
+    controller.set("model", model);
+    controller.loadMorePosts();
+  }
 });
 
 Labs.PartIndexRoute = Ember.Route.extend({
