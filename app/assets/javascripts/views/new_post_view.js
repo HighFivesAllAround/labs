@@ -5,16 +5,20 @@ Labs.NewPostView = Ember.View.extend({
 
   postBody: "",
 
+  urlRegexp: new RegExp(/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i),
+  tid: null,
+  inFlight: false,
+  isPreviewing: false,
+
   title: null,
   description: null,
   originalUrl: null,
   thumbnailUrl: null,
   html: null,
 
-  urlRegexp: new RegExp(/\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i),
-  tid: null,
-  inFlight: false,
-  isPreviewing: false,
+  willInsertElement: function() {
+    this.addObserver("postBody", this, "previewUrlObserver");
+  },
 
   submit: function(e) {
     e.preventDefault();
@@ -26,7 +30,7 @@ Labs.NewPostView = Ember.View.extend({
       thumbnailUrl: this.get("thumnailUrl"),
       html: this.get("html")
     });
-    this.set("postBody", "");
+    this.resetForm();
   },
 
   previewUrlObserver: function(e) {
@@ -39,7 +43,7 @@ Labs.NewPostView = Ember.View.extend({
         self.fetchPreviewableContent(matches[0]);
       }
     }, 2000));
-  }.observes("postBody"),
+  },
 
   fetchPreviewableContent: function(embedUrl) {
     var self = this;
@@ -47,7 +51,6 @@ Labs.NewPostView = Ember.View.extend({
     this.set("inFlight", true);
     $.embedly.oembed(embedUrl, {key: 'f3a6ced6ff1e4b9b964d8a6a73088200'}).progress(function(data) {
       self.set("inFlight", false);
-      self.removeObserver("postBody", "previewUrlObserver");
       self.setProperties({
         title: data.title,
         description: data.description,
@@ -55,6 +58,28 @@ Labs.NewPostView = Ember.View.extend({
         thumbnailUrl: data.thumbnail_url,
         html: data.html
       });
+    });
+  },
+
+  resetForm: function() {
+    this.setProperties({postBody: "", inFlight: false, isPreviewing: false});
+    this.clearMetadata();
+    this.addObserver("postBody", this, "previewUrlObserver");
+  },
+
+  cancelPreview: function() {
+    this.removeObserver("postBody", this, "previewUrlObserver");
+    this.setProperties({isPreviewing: false, inFlight: false});
+    this.clearMetadata();
+  },
+
+  clearMetadata: function() {
+    this.setProperties({
+      title: null,
+      description: null,
+      originalUrl: null,
+      thumbnailUrl: null,
+      html: null,
     });
   },
 
@@ -68,15 +93,7 @@ Labs.NewPostView = Ember.View.extend({
     }.property("parentView.isPreviewing"),
 
     cancel: function() {
-      this.set("parentView.isPreviewing", false);
-      this.get("parentView").setProperties({
-        title: null,
-        description: null,
-        originalUrl: null,
-        thumbnailUrl: null,
-        html: null
-      });
-      this.removeFromParent();
+      this.get("parentView").cancelPreview();
     },
 
     loading: function() {
