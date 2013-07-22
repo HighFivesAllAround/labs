@@ -14,3 +14,7 @@ gem 'zurb-foundation', '~> 4.0.0'
 group :development do
   gem 'capistrano'
 end
+
+group :development, :test do
+  gem 'rspec-rails'
+end
