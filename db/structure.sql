@@ -38,7 +38,8 @@ CREATE TABLE comments (
     commentable_id integer,
     commentable_type character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    part_version_id integer
 );
 
 
@@ -59,6 +60,39 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: part_versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE part_versions (
+    id integer NOT NULL,
+    part_id integer,
+    content text,
+    message character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: part_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE part_versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: part_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE part_versions_id_seq OWNED BY part_versions.id;
 
 
 --
@@ -210,6 +244,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY part_versions ALTER COLUMN id SET DEFAULT nextval('part_versions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY parts ALTER COLUMN id SET DEFAULT nextval('parts_id_seq'::regclass);
 
 
@@ -240,6 +281,14 @@ ALTER TABLE ONLY suggestions ALTER COLUMN id SET DEFAULT nextval('suggestions_id
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: part_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY part_versions
+    ADD CONSTRAINT part_versions_pkey PRIMARY KEY (id);
 
 
 --
@@ -282,6 +331,20 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 
 
 --
+-- Name: index_comments_on_part_version_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_part_version_id ON comments USING btree (part_version_id);
+
+
+--
+-- Name: index_part_versions_on_part_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_part_versions_on_part_id ON part_versions USING btree (part_id);
+
+
+--
 -- Name: index_parts_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -319,3 +382,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130611162319');
 INSERT INTO schema_migrations (version) VALUES ('20130628015023');
 
 INSERT INTO schema_migrations (version) VALUES ('20130701024831');
+
+INSERT INTO schema_migrations (version) VALUES ('20130722231649');

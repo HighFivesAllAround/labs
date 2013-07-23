@@ -62,6 +62,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     handlebars-source (1.0.0.rc4)
     highline (1.6.19)
     hike (1.2.3)
@@ -154,6 +159,7 @@ DEPENDENCIES
   capistrano
   ember-rails!
   ember-source (= 1.0.0.rc6)
+  factory_girl_rails
   jquery-rails
   pg
   rails (= 4.0.0)
