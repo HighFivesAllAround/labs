@@ -4,6 +4,7 @@ Labs.Part = Labs.Commentable.extend({
   content: DS.attr("string"),
 
   project: DS.belongsTo("Labs.Project"),
-  suggestions: DS.hasMany("Labs.Suggestion")
+  suggestions: DS.hasMany("Labs.Suggestion"),
+  topics: DS.hasMany("Labs.Topic"),
 
 });

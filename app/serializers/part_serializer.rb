@@ -7,4 +7,8 @@ class PartSerializer < ActiveModel::Serializer
 
   attributes :id, :title, :content, :project_id
 
+  def comments
+    object.topical_comments
+  end
+
 end

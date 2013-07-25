@@ -9,9 +9,10 @@ class Part < ActiveRecord::Base
 
   validates :title, :presence => true
 
-  def reset_topic!
-    topic = topics.create!(:content => content)
-    topical_comments.update_all(:topic_id => topic.id)
+  def reset_topic!(attrs)
+    topics.create!(attrs).tap do |t|
+      topical_comments.update_all(:topic_id => t.id)
+    end
   end
 
 end
