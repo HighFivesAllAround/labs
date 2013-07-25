@@ -39,7 +39,7 @@ CREATE TABLE comments (
     commentable_type character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    part_version_id integer
+    topic_id integer
 );
 
 
@@ -60,39 +60,6 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
-
-
---
--- Name: part_versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE part_versions (
-    id integer NOT NULL,
-    part_id integer,
-    content text,
-    message character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: part_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE part_versions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: part_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE part_versions_id_seq OWNED BY part_versions.id;
 
 
 --
@@ -234,17 +201,42 @@ ALTER SEQUENCE suggestions_id_seq OWNED BY suggestions.id;
 
 
 --
+-- Name: topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE topics (
+    id integer NOT NULL,
+    part_id integer,
+    content text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE topics_id_seq OWNED BY topics.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY part_versions ALTER COLUMN id SET DEFAULT nextval('part_versions_id_seq'::regclass);
 
 
 --
@@ -276,19 +268,18 @@ ALTER TABLE ONLY suggestions ALTER COLUMN id SET DEFAULT nextval('suggestions_id
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY topics ALTER COLUMN id SET DEFAULT nextval('topics_id_seq'::regclass);
+
+
+--
 -- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: part_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY part_versions
-    ADD CONSTRAINT part_versions_pkey PRIMARY KEY (id);
 
 
 --
@@ -324,6 +315,14 @@ ALTER TABLE ONLY suggestions
 
 
 --
+-- Name: topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY topics
+    ADD CONSTRAINT topics_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -331,17 +330,10 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 
 
 --
--- Name: index_comments_on_part_version_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_part_version_id ON comments USING btree (part_version_id);
-
-
---
--- Name: index_part_versions_on_part_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_part_versions_on_part_id ON part_versions USING btree (part_id);
+CREATE INDEX index_comments_on_topic_id ON comments USING btree (topic_id);
 
 
 --
@@ -356,6 +348,13 @@ CREATE INDEX index_parts_on_project_id ON parts USING btree (project_id);
 --
 
 CREATE INDEX index_suggestions_on_part_id ON suggestions USING btree (part_id);
+
+
+--
+-- Name: index_topics_on_part_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_topics_on_part_id ON topics USING btree (part_id);
 
 
 --

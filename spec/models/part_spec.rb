@@ -4,28 +4,32 @@ describe Part do
 
   let(:part) { FactoryGirl.create(:part) }
 
-  describe "#versioning_update!" do
+  describe "#reset_topic!" do
 
-    it "creates a new part version" do
-      old_content = part.content
-      message     = "Making some changes"
-
-      part.versioning_update!(message, :content => "new #{old_content}")
-      part.versions.count.should eq(1)
-
-      version = part.versions.first
-      version.message.should eq(message)
-      version.content.should eq(old_content)
+    it "creates a new version" do
+      part.reset_topic!
+      part.topics.count.should eq(1)
     end
 
     context "when the part has comments" do
 
+      let(:topic) { part.topics.first }
+
       before do
-        part.comments.create(:content => "Oh hai")
+        @old_comment = part.comments.create(:content => "Old topic")
+        part.reset_topic!
+        @new_comment = part.comments.create(:content => "New topic")
       end
 
-      it "keeps track of topical comments"
-      it "keeps history of all comments"
+      it "keeps history of all comments" do
+        part.comments.count.should eq(2)
+      end
+
+      it "keeps track of topical comments" do
+        topical_comments = part.topical_comments
+        topical_comments.count.should eq(1)
+        topical_comments.should include(@new_comment)
+      end
 
     end
   end
