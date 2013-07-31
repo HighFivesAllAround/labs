@@ -1,8 +1,12 @@
 class Api::CommentsController < ApplicationController
 
-  before_action :setup_commentable, :only => [:create]
+  before_action :setup_commentable, :only => [:index, :create]
 
   respond_to :json
+
+  def index
+    respond_with(:api, @commentable.comments)
+  end
 
   def create
     comment = @commentable.comments.create(comment_params)
@@ -10,8 +14,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id]).destroy
-    respond_with(:api, comment.destroy)
+    respond_with(:api, Comment.find(params[:id]).destroy)
   end
 
 
