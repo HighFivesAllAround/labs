@@ -1,4 +1,4 @@
-Labs.Topic = Labs.Commentable.extend({
+Labs.Version = Labs.Commentable.extend({
 
   content: DS.attr("string"),
 

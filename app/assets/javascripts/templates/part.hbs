@@ -4,9 +4,7 @@
     </div>
     {{#unless editing}}
       <div class="large-4 columns">
-        {{#if model.comments.length}}
-          <button {{action "resetTopic"}} class="button small right spacing-top">Reset Topic</button>
-        {{/if}}
+        <button {{action "createVersion"}} class="button small right spacing-top">Save Version</button>
         {{#linkTo "part.edit" class="button small right spacing-top"}} Edit {{/linkTo}}
         {{#linkTo "part.suggestion" class="button small right spacing-top"}} Suggestion {{/linkTo}}
       </div>
@@ -34,7 +32,6 @@
 <div class="row">
   <div class="large-12 columns">
     <h5>Comments</h5>
-    <button {{action "showAllComments"}}>Show all comments</button>
   </div>
 </div>
 {{render "comments" model.comments}}

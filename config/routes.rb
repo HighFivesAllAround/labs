@@ -6,7 +6,7 @@ Labs::Application.routes.draw do
     resources :posts
     resources :suggestions
     resources :comments
-    resources :topics
+    resources :versions
   end
 
   get '*resource', to: 'static#ember'

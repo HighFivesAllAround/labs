@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Version < ActiveRecord::Base
 
   belongs_to :part
   has_many :comments

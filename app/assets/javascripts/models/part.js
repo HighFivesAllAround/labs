@@ -5,6 +5,6 @@ Labs.Part = Labs.Commentable.extend({
 
   project: DS.belongsTo("Labs.Project"),
   suggestions: DS.hasMany("Labs.Suggestion"),
-  topics: DS.hasMany("Labs.Topic"),
+  versions: DS.hasMany("Labs.Version"),
 
 });
