@@ -11,6 +11,8 @@ class CreateVersions < ActiveRecord::Migration
     add_index :versions, :part_id
 
     add_column :comments, :version_id, :integer
+    add_column :comments, :archived, :boolean, :default => false
+
     add_index :comments, :version_id
   end
 end

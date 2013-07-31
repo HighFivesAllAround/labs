@@ -39,7 +39,8 @@ CREATE TABLE comments (
     commentable_type character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    version_id integer
+    version_id integer,
+    archived boolean DEFAULT false
 );
 
 

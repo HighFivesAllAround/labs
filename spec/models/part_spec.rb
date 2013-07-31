@@ -16,7 +16,7 @@ describe Part do
       before do
         @old_comment = part.comments.create(:content => "lol")
         part.cut_version!
-        @new_comment = part.comments.create(:content => "New engaging topic")
+        part.comments.create(:content => "New engaging topic")
       end
 
       it "keeps history of all comments" do

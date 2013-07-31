@@ -11,6 +11,7 @@ Labs.Router.map(function() {
       this.route("suggestion");
     });
     this.resource("suggestion", { path: "/suggestions/:suggestion_id" });
+    this.resource("version", { path: "/versions/:version_id" });
   });
 
 });

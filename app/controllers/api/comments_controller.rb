@@ -13,6 +13,12 @@ class Api::CommentsController < ApplicationController
     respond_with(:api, comment)
   end
 
+  def update
+    comment = Comment.find(params[:id])
+    comment.update_attributes(comment_params)
+    respond_with(:api, comment)
+  end
+
   def destroy
     respond_with(:api, Comment.find(params[:id]).destroy)
   end
@@ -29,7 +35,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :archived)
   end
 
 end

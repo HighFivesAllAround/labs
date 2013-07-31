@@ -2,7 +2,7 @@ class Part < ActiveRecord::Base
 
   belongs_to :project
 
-  has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :comments, -> { where(:archived => false) }, :as => :commentable, :dependent => :destroy
   has_many :suggestions, :dependent => :destroy
   has_many :versions, :dependent => :destroy
 
