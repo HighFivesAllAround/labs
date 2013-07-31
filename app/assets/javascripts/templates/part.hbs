@@ -4,6 +4,7 @@
     </div>
     {{#unless editing}}
       <div class="large-4 columns">
+        <button {{action "createVersion"}} class="button small right spacing-top">Save Version</button>
         {{#linkTo "part.edit" class="button small right spacing-top"}} Edit {{/linkTo}}
         {{#linkTo "part.suggestion" class="button small right spacing-top"}} Suggestion {{/linkTo}}
       </div>
@@ -18,20 +19,23 @@
 
 <div class="row">
   <div class="large-12 columns">
-    <div class="row">
-      <div class="large-12 columns">
-        <h5>Suggestions</h5>
-      </div>
-    </div>
-
+    <h3>Suggestions</h3>
     {{render "suggestions" model.suggestions}}
   </div>
 </div>
 
 <div class="row">
   <div class="large-12 columns">
-    <h5>Comments</h5>
+    <h3>Versions</h3>
+    {{render "versions" model.versions}}
   </div>
 </div>
-{{render "comments" model.comments}}
+
+<div class="row">
+  <div class="large-12 columns">
+    <h5>Comments</h5>
+    {{render "comments" model.comments}}
+  </div>
+</div>
+
 {{view "Labs.NewCommentView"}}

@@ -38,21 +38,25 @@ $light-red: #ff6666;
     .comment-header-actions {
       float: right;
 
-      a.delete {
+      a {
         color: $darker-secondary-color;
-        &:hover {
-          color: $light-red;
-        }
-      }
 
-      a.comment-date {
-        font-size: 12px;
-        font-weight: lighter;
-        padding-right: 10px;
-        text-decoration: none;
-        color: $darker-secondary-color;
-        &:hover {
-          text-decoration: underline;
+        &.delete {
+          &:hover { color: $light-red; }
+        }
+
+        &.archive {
+          &:hover { color: $primary-color; }
+        }
+
+        &.comment-date {
+          font-size: 12px;
+          font-weight: lighter;
+          padding-right: 10px;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
