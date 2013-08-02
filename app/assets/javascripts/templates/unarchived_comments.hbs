@@ -1,4 +1,4 @@
-{{#each comment in content}}
+{{#each comment in filteredComments}}
   <div class="row comment" {{bindAttr id="comment.domId"}}>
 
     <!-- Comment Header -->
@@ -10,6 +10,9 @@
 
       <div class="comment-header-actions">
         <a class="comment-date" {{bindAttr href="comment.anchor"}}>{{comment.timeAgo}}</a>
+        <a href="#" class="archive" {{action "archive" comment}} aria-label="Archive">
+          <i class="foundicon-folder"></i>
+        </a>
         <a href="#" class="delete" {{action "delete" comment}} aria-label="Delete">
           <i class="foundicon-remove"></i>
         </a>
