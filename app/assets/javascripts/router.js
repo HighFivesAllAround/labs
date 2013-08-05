@@ -5,6 +5,7 @@ Labs.Router.reopen({ location: "history" });
 
 Labs.Router.map(function() {
 
+  this.resource("login");
   this.resource("project", { path: "/projects/:project_id" }, function() {
     this.resource("part", { path: "/parts/:part_id" }, function() {
       this.route("edit");

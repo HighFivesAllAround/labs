@@ -1,0 +1,32 @@
+<nav class="sub-top-bar">
+</nav>
+
+<div class="row">
+  <h2>Login</h2>
+  <form class="form" {{action login on="submit"}}>
+    {{#if error}}
+      <div class="row">
+        <div class="large-4 columns">
+          {{error}}
+        </div>
+      </div>
+    {{/if}}
+    <div class="row">
+      <div class="large-4 columns">
+        {{input type="text" placeholder="username" valueBinding="username"}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        {{input type="password" placeholder="password" valueBinding="password"}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <button class="button small orange" {{bindAttr disabled="inFlight"}}>Login</button>
+      </div>
+    </div>
+  </form>
+</div>
