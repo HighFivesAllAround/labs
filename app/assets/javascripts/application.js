@@ -23,3 +23,10 @@
 Labs = Ember.Application.create({
   LOG_TRANSITIONS: true
 });
+
+// Ember data doesn't do any error handling that would plug into a controller
+window.jQuery(document).ajaxError(function(event, xhr, ajaxSettings, thrownError) {
+  if (xhr.status === 401) {
+    Labs.Router.router.transitionTo("login");
+  }
+});
