@@ -1,4 +1,4 @@
-class Api::PartsController < ApplicationController
+class Api::PartsController < ApiController
 
   respond_to :json
 
@@ -8,17 +8,18 @@ class Api::PartsController < ApplicationController
 
   def create
     project = Project.find(params[:part].delete(:project_id))
-    respond_with(:api, project.parts.create(part_params))
+    respond_with(:api, project.parts.create(part_params.merge(user: current_user)))
   end
 
   def update
-    part = Part.find(params[:id])
+    part = current_user.parts.find(params[:id])
     part.update(part_params)
     respond_with(:api, part)
   end
 
   def destroy
-    respond_with(:api, Part.find(params[:id]).destroy)
+    part = current_user.parts.find(params[:id]).destroy
+    respond_with(:api, part)
   end
 
 

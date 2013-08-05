@@ -1,4 +1,4 @@
-class Api::CommentsController < ApplicationController
+class Api::CommentsController < ApiController
 
   before_action :setup_commentable, :only => [:index, :create]
 
@@ -9,7 +9,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    comment = @commentable.comments.create(comment_params)
+    comment = @commentable.comments.create(comment_params.merge(user: current_user))
     respond_with(:api, comment)
   end
 
@@ -20,7 +20,8 @@ class Api::CommentsController < ApplicationController
   end
 
   def destroy
-    respond_with(:api, Comment.find(params[:id]).destroy)
+    comment = current_user.comments.find(params[:id]).destroy
+    respond_with(:api, comment.destroy)
   end
 
 

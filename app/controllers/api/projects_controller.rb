@@ -1,4 +1,4 @@
-class Api::ProjectsController < ApplicationController
+class Api::ProjectsController < ApiController
 
   respond_to :json
 
@@ -11,7 +11,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    respond_with(:api, Project.create(project_params))
+    respond_with(:api, Project.create(project_params).merge(user: current_user))
   end
 
 
