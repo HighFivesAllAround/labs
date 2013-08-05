@@ -1,6 +1,7 @@
 class Part < ActiveRecord::Base
 
   belongs_to :project
+  belongs_to :user
 
   has_many :comments, -> { where(:archived => false) }, :as => :commentable, :dependent => :destroy
   has_many :all_comments, :as => :commentable, :dependent => :destroy, :class_name => "Comment"
