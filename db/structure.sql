@@ -38,7 +38,8 @@ CREATE TABLE comments (
     commentable_id integer,
     commentable_type character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    user_id integer
 );
 
 
@@ -71,7 +72,8 @@ CREATE TABLE parts (
     content text,
     project_id integer,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    user_id integer
 );
 
 
@@ -104,7 +106,8 @@ CREATE TABLE posts (
     project_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    metadata text
+    metadata text,
+    user_id integer
 );
 
 
@@ -135,7 +138,8 @@ CREATE TABLE projects (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    user_id integer
 );
 
 
@@ -176,7 +180,8 @@ CREATE TABLE suggestions (
     content text,
     part_id integer,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    user_id integer
 );
 
 
@@ -197,6 +202,39 @@ CREATE SEQUENCE suggestions_id_seq
 --
 
 ALTER SEQUENCE suggestions_id_seq OWNED BY suggestions.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255),
+    username character varying(255),
+    password_digest character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
@@ -232,6 +270,13 @@ ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq':
 --
 
 ALTER TABLE ONLY suggestions ALTER COLUMN id SET DEFAULT nextval('suggestions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -275,10 +320,25 @@ ALTER TABLE ONLY suggestions
 
 
 --
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments USING btree (commentable_id, commentable_type);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
@@ -289,10 +349,38 @@ CREATE INDEX index_parts_on_project_id ON parts USING btree (project_id);
 
 
 --
+-- Name: index_parts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_parts_on_user_id ON parts USING btree (user_id);
+
+
+--
+-- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
+
+
+--
+-- Name: index_projects_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_on_user_id ON projects USING btree (user_id);
+
+
+--
 -- Name: index_suggestions_on_part_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_suggestions_on_part_id ON suggestions USING btree (part_id);
+
+
+--
+-- Name: index_suggestions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_suggestions_on_user_id ON suggestions USING btree (user_id);
 
 
 --
@@ -319,3 +407,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130611162319');
 INSERT INTO schema_migrations (version) VALUES ('20130628015023');
 
 INSERT INTO schema_migrations (version) VALUES ('20130701024831');
+
+INSERT INTO schema_migrations (version) VALUES ('20130724031933');
+
+INSERT INTO schema_migrations (version) VALUES ('20130729043333');
