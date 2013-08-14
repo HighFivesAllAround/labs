@@ -49,6 +49,10 @@ $light-red: #ff6666;
           &:hover { color: $primary-color; }
         }
 
+        &.edit {
+          &:hover { color: $primary-color; }
+        }
+
         &.comment-date {
           font-size: 12px;
           font-weight: lighter;
