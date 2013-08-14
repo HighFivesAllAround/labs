@@ -1,0 +1,37 @@
+<div class="row comment" {{bindAttr id="comment.domId"}}>
+
+  <!-- Comment Header -->
+  <div class="comment-header large-12 columns">
+    <div class="comment-header-info">
+      <img class="avatar" src="http://cdn1.iconfinder.com/data/icons/basicset/user_64.png"/>
+      <span>Dick Jane</span> <!-- not a link since profile isn't implemented -->
+    </div>
+
+    <div class="comment-header-actions">
+      <a class="comment-date" {{bindAttr href="comment.anchor"}}>{{comment.timeAgo}}</a>
+      <a href="#" class="edit" {{action "edit"}} aria-label="Edit">
+        <i class="foundicon-edit"></i>
+      </a>
+      <a href="#" class="archive" {{action "archive"}} aria-label="Archive">
+        <i class="foundicon-folder"></i>
+      </a>
+      <a href="#" class="delete" {{action "delete"}} aria-label="Delete">
+        <i class="foundicon-remove"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Comment Body -->
+  <div class="large-12 columns comment-body">
+    {{#if editing}}
+      {{textarea valueBinding="comment.content"}}
+      <div>
+        <button class="small secondary" {{action "cancel"}}>Cancel</button>
+        <button class="small right" {{action "update"}}>Update</button>
+      </div>
+    {{else}}
+      {{markdown comment.content}}
+    {{/if}}
+  </div>
+
+</div>
