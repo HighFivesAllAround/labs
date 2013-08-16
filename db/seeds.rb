@@ -25,7 +25,7 @@ end
 parts.each do |part|
 
   # Comment on part
-  part.comments.create!(:user => andrew, :content => lorem)
+  comment = part.comments.create!(:user => andrew, :content => lorem)
 
   # Give our part a suggestion
   suggestion = part.suggestions.create!(:user => tony, :content => lorem)

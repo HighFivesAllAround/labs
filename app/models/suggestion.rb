@@ -5,4 +5,7 @@ class Suggestion < ActiveRecord::Base
 
   has_many :comments, :as => :commentable, :dependent => :destroy
 
+  validates :user, :presence => true
+  validates :part, :presence => true
+
 end
