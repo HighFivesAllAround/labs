@@ -4,5 +4,6 @@ class Version < ActiveRecord::Base
   has_many :comments
 
   validates :content, :presence => true
+  validates :part, :presence => true
 
 end
