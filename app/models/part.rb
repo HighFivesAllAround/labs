@@ -9,6 +9,7 @@ class Part < ActiveRecord::Base
   has_many :versions, :dependent => :destroy
 
   validates :title, :presence => true
+  validates :user, :presence => true
 
   def cut_version!
     version = versions.create!(:content => content)
