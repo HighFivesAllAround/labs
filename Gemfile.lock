@@ -58,7 +58,7 @@ GEM
     diff-lcs (1.2.4)
     ember-data-source (0.13)
       ember-source
-    ember-source (1.0.0.rc7)
+    ember-source (1.0.0.rc8)
       handlebars-source (= 1.0.12)
     erubis (2.7.0)
     execjs (2.0.1)
@@ -162,7 +162,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capistrano
   ember-rails!
-  ember-source (= 1.0.0.rc7)
+  ember-source (= 1.0.0.rc8)
   factory_girl_rails
   jquery-rails
   kaminari
