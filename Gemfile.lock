@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/emberjs/ember-rails.git
-  revision: 243c9b4e420bfdeb7a63e43cdf00fb15cbace3d4
+  revision: f935423059a6d5d80642889bcefefd05a98adc66
   branch: master
   specs:
     ember-rails (0.13.0)
@@ -42,7 +42,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.0)
-    atomic (1.1.10)
+    atomic (1.1.13)
     barber (0.4.2)
       ember-source
       execjs
@@ -58,20 +58,19 @@ GEM
     diff-lcs (1.2.4)
     ember-data-source (0.13)
       ember-source
-    ember-source (1.0.0.rc6)
-      handlebars-source (= 1.0.0.rc4)
+    ember-source (1.0.0.rc7)
+      handlebars-source (= 1.0.12)
     erubis (2.7.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    execjs (2.0.1)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    handlebars-source (1.0.0.rc4)
+    handlebars-source (1.0.12)
     highline (1.6.19)
     hike (1.2.3)
-    i18n (0.6.4)
+    i18n (0.6.5)
     jquery-rails (3.0.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -84,7 +83,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     minitest (4.7.5)
-    multi_json (1.7.7)
+    multi_json (1.7.9)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -138,7 +137,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     thor (0.18.1)
-    thread_safe (0.1.0)
+    thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
     treetop (1.4.14)
@@ -163,7 +162,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capistrano
   ember-rails!
-  ember-source (= 1.0.0.rc6)
+  ember-source (= 1.0.0.rc7)
   factory_girl_rails
   jquery-rails
   kaminari
