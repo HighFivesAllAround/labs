@@ -2,6 +2,7 @@ Labs.Suggestion = Labs.Commentable.extend({
 
   content: DS.attr("string"),
 
-  part: DS.belongsTo("Labs.Part"),
+  part: DS.belongsTo("Part"),
+  project: DS.belongsTo("Project")
 
 });

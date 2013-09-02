@@ -2,7 +2,7 @@ Labs.Comment = DS.Model.extend({
   content: DS.attr("string"),
   archived: DS.attr("boolean"),
   createdAt: DS.attr("date"),
-  commentable: DS.belongsTo("Labs.Commentable", { polymorphic: true }),
+  commentable: DS.belongsTo("Commentable", { polymorphic: true }),
 
   timeAgo: function() {
     return window.moment(this.get("createdAt")).fromNow();
