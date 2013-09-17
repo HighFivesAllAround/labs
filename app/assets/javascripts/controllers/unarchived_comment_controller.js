@@ -20,9 +20,11 @@ Labs.UnarchivedCommentController = Ember.ObjectController.extend({
     },
 
     update: function() {
-      var comment = this.get("model");
-      comment.save();
-      this.set("editing", false);
+      var self = this;
+      var comment = self.get("model");
+      comment.save().then(function() {
+        self.set("editing", false);
+      });
     },
 
     cancel: function() {

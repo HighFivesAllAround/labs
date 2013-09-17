@@ -7,21 +7,24 @@ Labs.PartEditController = Ember.ObjectController.extend({
 
   actions: {
     save: function() {
-      var model = this.get("controllers.part.model");
-      var modelCopy = this.get("model");
-      this.get("editableProperties").forEach(function(key) {
+      var self = this;
+      var model = self.get("controllers.part.model");
+      var modelCopy = self.get("model");
+      self.get("editableProperties").forEach(function(key) {
         model.set(key, modelCopy.get(key));
       });
-      model.save();
-      this.transitionToRoute("part.index");
+      model.save().then(function() {
+        self.transitionToRoute("part.index");
+      });
     },
 
     destroy: function() {
-      var model = this.get("controllers.part.model");
+      var self = this;
+      var model = self.get("controllers.part.model");
       model.deleteRecord();
-      model.save();
-
-      this.transitionToRoute("project.index");
+      model.save().then(function() {
+        self.transitionToRoute("project.index");
+      });
     }
   }
 
