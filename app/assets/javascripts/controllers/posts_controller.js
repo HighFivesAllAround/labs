@@ -11,11 +11,12 @@ Labs.PostsController = Ember.ArrayController.extend({
     delete: function(post) {
       post.deleteRecord();
       post.save();
-    },
-
-    create: function(attrs) {
-      this.get("project.posts").createRecord(attrs).save();
     }
+  },
+
+  create: function(attrs) {
+    attrs.project = this.get("project.model");
+    this.store.createRecord('post', attrs).save();
   }
 
 });

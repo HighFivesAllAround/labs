@@ -9,12 +9,10 @@ Labs.PartsController = Ember.ArrayController.extend({
   actions: {
     create: function() {
       var self = this;
-      var key = "createPartObserver";
-      var project = this.get("project.model");
-      var part = project.get("parts").createRecord({ title: "New Part" });
-      part.save();
-      part.addObserver("id", key, function() {
-        part.removeObserver("id", key);
+      var project = self.get("project.model");
+      var part = self.store.createRecord('part', {title: "New Part", project: project});
+
+      part.save().then(function() {
         self.transitionToRoute("part.index", part);
       });
     }

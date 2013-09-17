@@ -7,9 +7,17 @@ Labs.PartSuggestionController = Ember.ObjectController.extend({
 
   actions: {
     create: function() {
-      var suggestion = this.get("part.model.suggestions").createRecord({ content: this.get("model.content") });
-      suggestion.save();
-      this.transitionToRoute("part.index");
+      var self = this;
+      var part = self.get("part.model");
+
+      var suggestion = self.store.createRecord("suggestion", {
+        content: self.get("model.content"),
+        part: part
+      });
+
+      suggestion.save().then(function() {
+        self.transitionToRoute("part.index");
+      });
     }
   }
 });
