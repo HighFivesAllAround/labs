@@ -21,20 +21,14 @@ Labs.Router.map(function() {
 // Routes
 //
 
-Labs.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-    var self = this;
-    Labs.Project.find({}).onLoad(function(projects) {
-      self.transitionTo("project.index", projects.toArray()[0]);
-    });
-  }
-});
-
 Labs.ProjectIndexRoute = Ember.Route.extend({
-  model: function() { return this.modelFor("project"); },
-  setupController: function(controller, model) {
-    controller.set("model", model);
-    controller.loadMorePosts();
+  model: function() { return this.modelFor("project") },
+  setupController: function(ctrl, model) {
+    ctrl.set("model", model);
+    model.loadPosts(ctrl.get("postPageNumber"))
+      .then(function(nextPageNum) {
+        ctrl.set("postPageNumber", nextPageNum);
+      });
   }
 });
 
