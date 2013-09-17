@@ -18,6 +18,11 @@ Labs.PartSuggestionController = Ember.ObjectController.extend({
       suggestion.save().then(function() {
         self.transitionToRoute("part.index");
       });
+    },
+
+    cancel: function() {
+      this.get("controllers.part").set("editing", false);
+      this.transitionToRoute("part.index");
     }
   }
 });

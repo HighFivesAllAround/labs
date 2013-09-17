@@ -37,33 +37,26 @@ Labs.PartIndexRoute = Ember.Route.extend({
 });
 
 Labs.PartEditRoute = Ember.Route.extend({
-  activate: function() {
-    var partController = this.controllerFor("part");
-    var editController = this.controllerFor("part.edit");
-    partController.set("editing", true);
-    partController.get("model").onLoad(function(model) {
-      var modelCopy = Ember.Object.create();
-      editController.get("editableProperties").forEach(function(key) {
-        modelCopy.set(key, model.get(key));
-      });
-      editController.set("model", modelCopy);
+  model: function() {
+    var part = this.modelFor("part");
+    var partCopy = Ember.Object.create();
+    var ctrl = this.controllerFor("part.edit");
+
+    ctrl.get("editableProperties").forEach(function(key) {
+      partCopy.set(key, part.get(key));
     });
+
+    ctrl.set("model", partCopy);
   },
-  deactivate: function() {
-    this.controllerFor("part").set("editing", false);
+
+  setupController: function(ctrl, model) {
+    this.controllerFor("part").set("editing", true);
   }
 });
 
 Labs.PartSuggestionRoute = Ember.Route.extend({
-  activate: function() {
-    var partController = this.controllerFor("part");
-    partController.set("editing", true);
-  },
-  deactivate: function() {
-    var partController = this.controllerFor("part");
-    partController.set("editing", false);
-  },
   setupController: function() {
+    this.controllerFor("part").set("editing", true);
     var controller = this.get("controller");
     var content = controller.get("controllers.part.model.content");
     controller.set("model", { content: content });

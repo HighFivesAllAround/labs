@@ -25,6 +25,11 @@ Labs.PartEditController = Ember.ObjectController.extend({
       model.save().then(function() {
         self.transitionToRoute("project.index");
       });
+    },
+
+    cancel: function() {
+      this.get("controllers.part").set("editing", false);
+      this.transitionToRoute("part.index");
     }
   }
 
