@@ -162,7 +162,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capistrano
   ember-rails!
-  ember-source (= 1.0.0.rc8)
   factory_girl_rails
   jquery-rails
   kaminari
