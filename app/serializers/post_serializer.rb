@@ -1,6 +1,7 @@
 class PostSerializer < ActiveModel::Serializer
 
   has_many :comments
+  has_one :user
 
   embed :ids, :include => true
 
@@ -8,5 +9,9 @@ class PostSerializer < ActiveModel::Serializer
 
   # oembed metadata
   attributes :title, :description, :original_url, :thumbnail_url, :html
+
+  def user
+    object.user
+  end
 
 end

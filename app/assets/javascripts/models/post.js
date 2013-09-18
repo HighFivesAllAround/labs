@@ -8,6 +8,7 @@ Labs.Post = Labs.Commentable.extend({
   thumbnail_url: DS.attr('string'),
   html: DS.attr('string'),
 
-  project: DS.belongsTo("project")
+  project: DS.belongsTo("project"),
+  user: DS.belongsTo("user")
 
 });

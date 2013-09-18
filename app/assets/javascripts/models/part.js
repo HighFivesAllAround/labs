@@ -4,6 +4,7 @@ Labs.Part = Labs.Commentable.extend({
   content: DS.attr("string"),
 
   project: DS.belongsTo("project"),
+  user: DS.belongsTo("user"),
   suggestions: DS.hasMany("suggestion"),
   versions: DS.hasMany("version")
 

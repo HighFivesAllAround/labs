@@ -4,6 +4,7 @@ Labs.Project = DS.Model.extend({
 
   parts: DS.hasMany("part"),
   posts: DS.hasMany("post"),
+  user: DS.belongsTo("user"),
 
   loadPosts: function(page) {
     page = page || 1;
