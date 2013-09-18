@@ -2,8 +2,8 @@ Labs.Project = DS.Model.extend({
 
   name: DS.attr("string"),
 
-  parts: DS.hasMany("Part"),
-  posts: DS.hasMany("Post"),
+  parts: DS.hasMany("part"),
+  posts: DS.hasMany("post"),
 
   loadPosts: function(page) {
     page = page || 1;
