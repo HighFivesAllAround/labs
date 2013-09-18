@@ -26,8 +26,9 @@ Labs.ProjectIndexRoute = Ember.Route.extend({
   setupController: function(ctrl, model) {
     ctrl.set("model", model);
     model.loadPosts(ctrl.get("postPageNumber"))
-      .then(function(nextPageNum) {
-        ctrl.set("postPageNumber", nextPageNum);
+      .then(function(meta) {
+        ctrl.set("postPageNumber", meta.page);
+        ctrl.set("postTotalPages", meta.totalPages);
       });
   }
 });

@@ -11,8 +11,9 @@ Labs.Project = DS.Model.extend({
     var promise = new Ember.RSVP.Promise(function(resolve, reject) {
       self.store.find("post", { project_id: self.get("id"), page: page })
         .then(function(posts) {
+          var meta = self.store.metadataFor('post');
           self.get("posts").addObjects(posts);
-          resolve(page + 1);
+          resolve({ page: meta.page, totalPages: meta.total_pages });
         }, function() { reject() });
       });
 
