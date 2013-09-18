@@ -5,10 +5,9 @@ $(function() {
   });
 });
 
-DS.RESTAdapter.configure("Labs.Suggestion", { alias: "Suggestion" });
-DS.RESTAdapter.configure("Labs.Part", { alias: "Part" });
-
 DS.RESTAdapter = DS.RESTAdapter.extend({ namespace: "api" });
+
+Labs.ApplicationSerializer = DS.ActiveModelSerializer;
 
 Labs.Store = DS.Store.extend({
   adapter: "DS.RESTAdapter"

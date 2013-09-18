@@ -2,30 +2,34 @@ Labs.UnarchivedCommentController = Ember.ObjectController.extend({
 
   editing: false,
 
-  archive: function() {
-    var comment = this.get("model");
-    comment.set("archived", true);
-    comment.save();
-  },
+  actions: {
+    archive: function() {
+      var comment = this.get("model");
+      comment.set("archived", true);
+      comment.save();
+    },
 
-  delete: function() {
-    var comment = this.get("model");
-    comment.deleteRecord();
-    comment.save();
-  },
+    delete: function() {
+      var comment = this.get("model");
+      comment.deleteRecord();
+      comment.save();
+    },
 
-  edit: function() {
-    this.set("editing", true);
-  },
+    edit: function() {
+      this.set("editing", true);
+    },
 
-  update: function() {
-    var comment = this.get("model");
-    comment.save();
-    this.set("editing", false);
-  },
+    update: function() {
+      var self = this;
+      var comment = self.get("model");
+      comment.save().then(function() {
+        self.set("editing", false);
+      });
+    },
 
-  cancel: function() {
-    this.set("editing", false);
+    cancel: function() {
+      this.set("editing", false);
+    }
   }
 
 });

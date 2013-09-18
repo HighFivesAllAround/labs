@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="large-12 columns">
-    {{#linkTo "part.index" part class="button small secondary left"}} Cancel {{/linkTo}}
+    <a href="#" {{action "cancel"}} class="button small secondary left">Cancel</a>
     <button class="btn small left" {{action "destroy"}}>Delete</button>
     <button class="btn small right" {{action "save"}}>Save</button>
   </div>
