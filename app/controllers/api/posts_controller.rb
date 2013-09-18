@@ -3,7 +3,12 @@ class Api::PostsController < ApiController
   respond_to :json
 
   def index
-    respond_with(:api, Project.find(params.require(:project_id)).posts.order(created_at: :desc).page(params[:page]).per(params[:per_page] || 10))
+    project = Project.find(params.require(:project_id))
+    page = (params[:page] || 1).to_i
+    per = params[:per_page] || 10
+    posts = project.posts.order(created_at: :desc).page(page).per(per)
+
+    render :json => posts, :meta => { :total_pages => posts.total_pages, :page => page }
   end
 
   def create

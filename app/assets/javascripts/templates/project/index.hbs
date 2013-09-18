@@ -1,4 +1,6 @@
 {{render "posts" model.posts}}
 <div class="row">
-  <a class="button expand" {{action "loadMorePosts"}}>Load More Posts</a>
+  {{#unless onLastPostPage}}
+    <a class="button expand" {{action "loadMorePosts"}}>Load More Posts</a>
+  {{/unless}}
 </div>

@@ -11,10 +11,15 @@ Labs.NewCommentView = Ember.View.extend({
   //
   submit: function(e) {
     e.preventDefault();
-    var commentable = this.get("controller.model");
-    var comment = commentable.get("comments").createRecord({content: this.commentBody});
-    comment.save();
-    this.set("commentBody", "");
+    var self = this;
+    var comment = Labs.Comment.store.createRecord("comment", {
+      content: self.commentBody,
+      commentable: self.get("controller.model")
+    });
+
+    comment.save().then(function() {
+      self.set("commentBody", "");
+    });
   }
 
 });

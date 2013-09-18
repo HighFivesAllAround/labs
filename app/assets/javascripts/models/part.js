@@ -3,8 +3,8 @@ Labs.Part = Labs.Commentable.extend({
   title: DS.attr("string"),
   content: DS.attr("string"),
 
-  project: DS.belongsTo("Labs.Project"),
-  suggestions: DS.hasMany("Labs.Suggestion"),
-  versions: DS.hasMany("Labs.Version"),
+  project: DS.belongsTo("project"),
+  suggestions: DS.hasMany("suggestion"),
+  versions: DS.hasMany("version")
 
 });

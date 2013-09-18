@@ -7,13 +7,16 @@ Labs.PostsController = Ember.ArrayController.extend({
   sortProperties: ["id"],
   sortAscending: false,
 
-  delete: function(post) {
-    post.deleteRecord();
-    post.save();
+  actions: {
+    delete: function(post) {
+      post.deleteRecord();
+      post.save();
+    }
   },
 
   create: function(attrs) {
-    this.get("project.posts").createRecord(attrs).save();
+    attrs.project = this.get("project.model");
+    this.store.createRecord('post', attrs).save();
   }
 
 });

@@ -21,20 +21,15 @@ Labs.Router.map(function() {
 // Routes
 //
 
-Labs.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-    var self = this;
-    Labs.Project.find({}).onLoad(function(projects) {
-      self.transitionTo("project.index", projects.toArray()[0]);
-    });
-  }
-});
-
 Labs.ProjectIndexRoute = Ember.Route.extend({
-  model: function() { return this.modelFor("project"); },
-  setupController: function(controller, model) {
-    controller.set("model", model);
-    controller.loadMorePosts();
+  model: function() { return this.modelFor("project") },
+  setupController: function(ctrl, model) {
+    ctrl.set("model", model);
+    model.loadPosts(ctrl.get("postPageNumber"))
+      .then(function(meta) {
+        ctrl.set("postPageNumber", meta.page);
+        ctrl.set("postTotalPages", meta.totalPages);
+      });
   }
 });
 
@@ -43,33 +38,26 @@ Labs.PartIndexRoute = Ember.Route.extend({
 });
 
 Labs.PartEditRoute = Ember.Route.extend({
-  activate: function() {
-    var partController = this.controllerFor("part");
-    var editController = this.controllerFor("part.edit");
-    partController.set("editing", true);
-    partController.get("model").onLoad(function(model) {
-      var modelCopy = Ember.Object.create();
-      editController.get("editableProperties").forEach(function(key) {
-        modelCopy.set(key, model.get(key));
-      });
-      editController.set("model", modelCopy);
+  model: function() {
+    var part = this.modelFor("part");
+    var partCopy = Ember.Object.create();
+    var ctrl = this.controllerFor("part.edit");
+
+    ctrl.get("editableProperties").forEach(function(key) {
+      partCopy.set(key, part.get(key));
     });
+
+    ctrl.set("model", partCopy);
   },
-  deactivate: function() {
-    this.controllerFor("part").set("editing", false);
+
+  setupController: function(ctrl, model) {
+    this.controllerFor("part").set("editing", true);
   }
 });
 
 Labs.PartSuggestionRoute = Ember.Route.extend({
-  activate: function() {
-    var partController = this.controllerFor("part");
-    partController.set("editing", true);
-  },
-  deactivate: function() {
-    var partController = this.controllerFor("part");
-    partController.set("editing", false);
-  },
   setupController: function() {
+    this.controllerFor("part").set("editing", true);
     var controller = this.get("controller");
     var content = controller.get("controllers.part.model.content");
     controller.set("model", { content: content });
