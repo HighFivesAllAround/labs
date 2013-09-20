@@ -11,7 +11,7 @@ package "postgresql"
 package "libpq5"
 package "libpq-dev"
 
-cookbook_file "/etc/postgresql/9.2/main/pg_hba.conf" do
+cookbook_file "/etc/postgresql/9.3/main/pg_hba.conf" do
   mode 0640
   owner "postgres"
   group "postgres"
